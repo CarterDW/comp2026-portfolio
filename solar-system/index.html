@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Solar System Formation</title>
+  <meta name="description" content="Which physics must go into a simulation before the solar systems it makes look physically reasonable?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../assets/portfolio.css">
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">Portfolio</a>
+    <ul>
+      <li><a href="#ledger">Ledger</a></li>
+      <li><a href="#final-arc">Final arc</a></li>
+      <li><a href="#open-problem">Open problem</a></li>
+      <li><a href="#next">Still running</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+  <div class="crumb"><a href="/">Carter Williams</a> / <a href="../">Portfolio</a> / Solar system formation</div>
+
+  <header class="page-hero">
+    <div class="kicker">Project 1 · Solar system formation</div>
+    <h1>What physics does a solar system need?</h1>
+    <p class="lede">
+      This project starts from a cold gas cloud and ends with terrestrial planets, using our own N-body,
+      SPH and disk codes. Every ingredient was added because the simpler model failed in a specific way.
+      This page is that ledger, and the test of which entries the final systems actually depend on.
+    </p>
+    <div class="links">
+      <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/04_Mechanics_and_Electrostatics/solar_system">Code</a>
+      <a class="btn" href="#ledger">The ledger</a>
+    </div>
+  </header>
+
+  <!-- ===================== MOVIES ===================== -->
+  <section>
+    <h2>From cloud to planets</h2>
+    <div class="movies">
+      <figure class="fig">
+        <a class="zoom" href="img/collapse_to_disk.gif"><img src="img/collapse_to_disk.gif" alt="Gas cloud collapsing into a protostar and disk" loading="lazy"></a>
+        <figcaption><b>Collapse to a disk.</b> A centrally concentrated, slowly spinning cloud (SPH) collapses onto a
+          sink particle, the protostar, and leaves a rotating disk.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/stellar_ignition.gif"><img src="img/stellar_ignition.gif" alt="Protostar evolving towards the main sequence" loading="lazy"></a>
+        <figcaption><b>Ignition.</b> A one-zone protostar model contracts down the Hayashi track and settles onto
+          the main sequence as a 0.82 M☉ star.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/formation.gif"><img src="img/formation.gif" alt="Planetary embryos growing in the disk" loading="lazy"></a>
+        <figcaption><b>Planet formation.</b> Embryos grow in the gas disk. Without pebble accretion they stall
+          below the ~10 M⊕ needed to become giants.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== LEDGER ===================== -->
+  <section id="ledger">
+    <h2>The ledger</h2>
+    <p class="prose">Each card is one ingredient and the failure that forced it in. Highlighted cards are from the
+      final arc. Together they are the answer to the project's question as it stands.</p>
+
+    <div class="ledger">
+      <div class="row"><div class="rung"><span>Rung 1</span></div><div class="ing">Symplectic integrator (leapfrog)</div>
+        <div class="fail">Without it: <b>forward Euler's energy drifts and orbits spiral outward.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 2</span></div><div class="ing">Gravitational softening</div>
+        <div class="fail">Without it: <b>the energy error stops falling with dt</b>, because random close pairs whirl faster than any step can follow.</div></div>
+      <div class="row"><div class="rung"><span>Rungs 2–3</span></div><div class="ing">Gas pressure and dissipation (SPH)</div>
+        <div class="fail">Without it: <b>a cold cloud bounces and ejects ~20% of its mass.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 4</span></div><div class="ing">Sink particles; jittered, centrally concentrated cloud</div>
+        <div class="fail">Without it: <b>a uniform cloud splits into ~4 stars</b>, and the protostar can't be resolved.</div></div>
+      <div class="row"><div class="rung"><span>Rung 4b</span></div><div class="ing">One-zone protostar</div>
+        <div class="fail">Without it: <b>no stellar luminosity and no ignition.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 5</span></div><div class="ing">Pebble accretion</div>
+        <div class="fail">Without it: <b>cores stall below 10 M⊕, so no giants form.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 5</span></div><div class="ing">Two-alpha disk (α<sub>acc</sub> ≠ α<sub>turb</sub>)</div>
+        <div class="fail">Without it: <b>migration drags every giant inward.</b> With it, one 2.5 M<sub>J</sub> giant survives at 6.1 AU.</div></div>
+      <div class="row"><div class="rung"><span>Rung 6</span></div><div class="ing">Planetesimal swarm (dynamical friction)</div>
+        <div class="fail">Without it: <b>orbits are ~4× too excited (AMD) and there are too many planets.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 6</span><span class="chip">numerical</span></div><div class="ing">Pericenter substeps, encounter groups</div>
+        <div class="fail">Without it: <b>eccentric bodies' orbits random-walk.</b></div></div>
+      <div class="row"><div class="rung"><span>Rung 6b</span><span class="chip">not enough</span></div><div class="ing">Pebble drift and streaming instability</div>
+        <div class="fail">With it, still <b>no planetesimals form inside 2.7 AU.</b></div></div>
+      <div class="row new"><div class="rung"><span>Final arc · step 1</span><span class="chip done">done</span></div><div class="ing">Accretion-heated disk</div>
+        <div class="fail">The passive disk puts the silicate line at 0.08 AU. <b>Infall heating pushes it past 1 AU, but only for the first ~0.1 Myr.</b></div></div>
+      <div class="row new"><div class="rung"><span>Final arc · step 4</span><span class="chip done">done</span></div><div class="ing">Collisional fragmentation</div>
+        <div class="fail">Perfect mergers overstate growth: <b>many Rung 6 "mergers" fall in the hit-and-run regime.</b></div></div>
+      <div class="row new"><div class="rung"><span>Final arc · step 6</span><span class="chip done">done</span></div><div class="ing">General relativity</div>
+        <div class="fail">Without it: <b>Mercury's perihelion is short by 43″ per century.</b></div></div>
+      <div class="row new"><div class="rung"><span>Final arc · step 2</span><span class="chip next">deferred</span></div><div class="ing">Rock sublimation at the silicate line</div>
+        <div class="fail">Needs vapor transport. With the line at 0.2–0.3 AU after infall, it is unlikely to matter at 1 AU.</div></div>
+    </div>
+
+    <figure class="fig" style="margin-top:28px">
+      <a class="zoom" href="img/ledger.png"><img src="img/ledger.png" alt="Grid of before/after panels, one per ledger entry" loading="lazy"></a>
+      <figcaption><b>The ledger as one figure.</b> One before/after panel per ingredient, from the integrator
+        (Rung 1) to the planets' family trees (Rung 6). Click to enlarge.</figcaption>
+    </figure>
+
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/systems_embryos_only.png"><img src="img/systems_embryos_only.png" alt="Eight simulated terrestrial systems with embryos only" loading="lazy"></a>
+        <figcaption><b>Embryos only.</b> Eight seeds after 20 Myr against the Solar System (top). Lines run from
+          pericenter to apocenter: the orbits are too eccentric and there are too many planets.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/systems_with_swarm.png"><img src="img/systems_with_swarm.png" alt="Eight simulated terrestrial systems with a planetesimal swarm" loading="lazy"></a>
+        <figcaption><b>With 200 planetesimals.</b> Dynamical friction from the swarm calms the orbits (AMD down ~4×)
+          and leaves fewer planets. Every run's largest planets still sit at 1.7–2.8 AU.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL ARC ===================== -->
+  <section id="final-arc">
+    <h2>Final arc</h2>
+
+    <div class="step-head"><h3>Where the planets came from</h3><span class="chip done">step 0</span></div>
+    <figure class="fig">
+      <a class="zoom" href="img/genealogy_seed7.png"><img src="img/genealogy_seed7.png" alt="Family trees of every planet in one run" loading="lazy"></a>
+      <figcaption><b>Family trees, one run.</b> Each track is one body over time, colored by the planet that
+        eventually absorbs it. The big planets are water-rich worlds scattered in from beyond the snow line.</figcaption>
+    </figure>
+
+    <div class="step-head"><h3>An accretion-heated disk</h3><span class="chip done">step 1</span></div>
+    <figure class="fig">
+      <a class="zoom" href="img/disk_thermal.png"><img src="img/disk_thermal.png" alt="Disk midplane temperature map, accretion rate history, and silicate line position" loading="lazy"></a>
+      <figcaption><b>Left:</b> midplane temperature against radius and time, with the snow line (aqua) and silicate
+        line (orange). Dashed lines show where the passive disk of Rungs 5–6 puts them. <b>Middle:</b> the heating comes from
+        infall onto the star, which fades after ~0.1 Myr, and then from the viscous disk. <b>Right:</b> rock evaporates
+        out past 1 AU only while infall lasts, for any reasonable dust opacity.</figcaption>
+    </figure>
+
+    <div class="step-head"><h3>Collisions that don't just merge</h3><span class="chip done">step 4</span></div>
+    <figure class="fig">
+      <a class="zoom" href="img/collision_map.png"><img src="img/collision_map.png" alt="Collision outcome regimes by impact speed and angle" loading="lazy"></a>
+      <figcaption><b>Outcome map</b> (Leinhardt &amp; Stewart 2012) for four mass ratios. The white dots are every
+        Rung 6 merger at its reconstructed speed and a random impact angle. Many land in hit-and-run territory,
+        where the bodies should have separated again.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/collision_gallery.png"><img src="img/collision_gallery.png" alt="Four staged collisions in the integrator" loading="lazy"></a>
+      <figcaption><b>The four regimes inside the integrator,</b> 200 hours after a staged impact: perfect merger,
+        partial accretion, hit-and-run, and super-catastrophic disruption into 79 fragments. Mass and momentum are
+        conserved to round-off in every case.</figcaption>
+    </figure>
+
+    <div class="step-head"><h3>The real Solar System, with general relativity</h3><span class="chip done">step 6</span></div>
+    <figure class="fig">
+      <a class="zoom" href="img/gr_mercury.png"><img src="img/gr_mercury.png" alt="Mercury perihelion advance with and without GR; energy error over 1 Myr" loading="lazy"></a>
+      <figcaption><b>Mercury's perihelion.</b> The other planets alone advance it 528.8″ per century; adding GR
+        gives 571.8″. The difference is <b>42.94″/century against GR's 42.98″</b>. Right: 10<sup>8</sup> steps over
+        1 Myr, energy error bounded at ~4×10<sup>−8</sup> with no secular drift.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== OPEN PROBLEM ===================== -->
+  <section id="open-problem">
+    <h2>The open problem</h2>
+    <div class="callout prose">
+      <p><b>No ingredient so far puts enough mass inside 1.5 AU.</b> Every run's largest planets sit at 1.7–2.8 AU,
+        where the Solar System has Mars and the asteroid belt. The hot disk was the physics attempt. A mass-matched
+        control, with the inner disk rescaled to hold the Solar System's mass, is running now. It asks whether the
+        disk is the only thing wrong, or whether the dynamics are too.</p>
+    </div>
+  </section>
+
+  <!-- ===================== STILL RUNNING ===================== -->
+  <section id="next">
+    <h2>Still running</h2>
+    <ul class="todo-list prose">
+      <li><span class="chip running">step 5</span><div><b>The physics ladder and the removal test.</b> New runs with the
+        mass-matched disk and with fragmentation, then the full model with one ingredient removed at a time. The result is a
+        necessity matrix: which ingredient each scorecard row depends on.</div></li>
+      <li><span class="chip next">step 7</span><div><b>The Lyapunov time.</b> How long the Solar System stays predictable
+        (about 5 Myr, Laskar 1989), measured with our integrator.</div></li>
+      <li><span class="chip next">step 8</span><div><b>Our planets' long-term fate.</b> The simulated systems run to
+        100–200 Myr: are they stable, and how chaotic are they?</div></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <span><a href="../">← Portfolio</a> · <a href="/">Carter Williams</a></span>
+  <button class="theme-toggle" id="theme-toggle" type="button">Toggle theme</button>
+</footer>
+</body>
+</html>
