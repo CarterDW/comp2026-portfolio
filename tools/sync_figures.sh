@@ -25,5 +25,18 @@ $S/rung5_planet_formation/plots/formation/formation.gif solar-system/img/formati
 07_Stat_Mech_and_Ising/checks/plots/kt_quench.png     defects/img/kt_quench.png
 10_Convolutions_and_Galaxies/results/step3_gallery.png sky-classifier/img/step3_gallery.png
 10_Convolutions_and_Galaxies/results/step7a_fields.png sky-classifier/img/step7a_fields.png
+07_Stat_Mech_and_Ising/checks/plots/kt_step3_transition.png defects/img/kt_transition.png
+07_Stat_Mech_and_Ising/checks/plots/kt_correlations.png defects/img/kt_correlations.png
+10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png
+10_Convolutions_and_Galaxies/results/step3_psffix.png sky-classifier/img/step3_psffix.png
+10_Convolutions_and_Galaxies/results/step4_offdiagonal.png sky-classifier/img/step4_offdiagonal.png
+10_Convolutions_and_Galaxies/results/step5_ood.png sky-classifier/img/step5_ood.png
+10_Convolutions_and_Galaxies/results/step6_accuracy.png sky-classifier/img/step6_accuracy.png
 LIST
+
+# GIF -> MP4 for movies too big to ship as GIFs (ffmpeg from imageio-ffmpeg in HaloPipeline)
+FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())")
+"$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kt_quench.gif" \
+  -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 32 "$DST/defects/img/kt_quench.mp4"
+
 echo "synced to $DST"

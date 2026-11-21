@@ -58,19 +58,48 @@
   </section>
 
   <section id="vortices">
-    <h2>Vortices in the XY model</h2>
+    <h2>Warm-up: vortices and the Kosterlitz–Thouless transition</h2>
+    <p class="prose">Before quenching anything, the engine has to get the equilibrium physics of the 2D XY model right.
+      This model has no ordinary ordered phase. It still has a transition, at T<sub>KT</sub> ≈ 0.893, driven by
+      vortex–antivortex pairs unbinding. This warm-up is finished.</p>
+
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kt_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>A quench to T = 0.5.</b> Color is the spin angle, so each vortex is a point
+          where all the colors meet (black: +1, white: −1). Right after the quench the field is full of vortices. They find
+          partners and annihilate, and the colored domains grow. This is the coarsening that the final arc measures
+          for every model.</figcaption>
+      </div>
+    </figure>
+
     <figure class="fig">
       <a class="zoom" href="img/kt_quench.png"><img src="img/kt_quench.png" alt="Snapshots of a quenched XY model showing vortex annihilation" loading="lazy"></a>
-      <figcaption><b>A quench.</b> Color is the spin angle, so every vortex is a point where all the colors meet.
-        After the quench, 5424 vortices annihilate in pairs down to 10 by t = 5000 sweeps. Their density
-        falls close to ln t / t, as expected for a 2D XY model coarsening under dissipative dynamics.</figcaption>
+      <figcaption><b>Counting them.</b> 5424 vortices right after the quench, 10 by t = 5000 sweeps. The density
+        falls close to ln t / t, as expected for 2D XY coarsening under dissipative dynamics.</figcaption>
     </figure>
+
     <figure class="fig">
-      <a class="zoom" href="img/kt_vortices.png"><img src="img/kt_vortices.png" alt="Planted vortex pairs, Coulomb-gas energy, and an equilibrium vortex field" loading="lazy"></a>
-      <figcaption><b>Checking the engine.</b> Left: planted vortex–antivortex pairs are found by the detector. Middle: the
-        pair energy follows the Coulomb-gas law 4π ln s, which is the input to the Kosterlitz–Thouless transition. Right: an
-        equilibrium field at T = 0.95.</figcaption>
+      <a class="zoom" href="img/kt_transition.png"><img src="img/kt_transition.png" alt="Helicity modulus, vortex density and specific heat against temperature" loading="lazy"></a>
+      <figcaption><b>Finding the transition.</b> Left: the stiffness crosses the Nelson–Kosterlitz line 2T/π at 0.938
+        (L = 16) and 0.926 (L = 32), drifting toward 0.893 as L grows, slowly, as expected. Middle: the vortex density is
+        smooth through T<sub>KT</sub>, so counting vortices can't locate the transition. Right: the specific heat peaks
+        about 15% above T<sub>KT</sub>, not at it.</figcaption>
     </figure>
+
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/kt_correlations.png"><img src="img/kt_correlations.png" alt="Spin correlations and the exponent eta against temperature" loading="lazy"></a>
+        <figcaption><b>The KT exponent.</b> Below T<sub>KT</sub>, correlations fall as power laws, and the exponent η reaches
+          1/4 at the transition, both fitted from G(r) and predicted from the measured stiffness. Above it they are no
+          longer power laws.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kt_vortices.png"><img src="img/kt_vortices.png" alt="Planted vortex pairs, Coulomb-gas energy, and an equilibrium vortex field" loading="lazy"></a>
+        <figcaption><b>Checking the vortex counter.</b> Planted pairs are found exactly. The pair energy follows the
+          Coulomb-gas law 4π ln s, which is the input to the KT argument. Right: an equilibrium field at T = 0.95.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section id="next">
