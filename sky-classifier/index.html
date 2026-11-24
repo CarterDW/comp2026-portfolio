@@ -20,11 +20,11 @@
   <div class="nav-inner">
     <a class="brand" href="../">Portfolio</a>
     <ul>
-      <li><a href="#gap">The gap</a></li>
-      <li><a href="#telescope">The simulation</a></li>
-      <li><a href="#learned">What it learned</a></li>
-      <li><a href="#fields">Real fields</a></li>
-      <li><a href="#next">Coming</a></li>
+      <li><a href="#ladder">Ladder</a></li>
+      <li><a href="#removal">Removal test</a></li>
+      <li><a href="#faint">Faint galaxies</a></li>
+      <li><a href="#colors">Star colors</a></li>
+      <li><a href="#history">How it started</a></li>
     </ul>
   </div>
 </nav>
@@ -36,38 +36,136 @@
     <div class="kicker">Project 3 · Sky-object classifier</div>
     <h1>What must a simulated sky contain?</h1>
     <p class="lede">
-      The classifier's stars and artifacts are simulated, but the sky it has to work on is real. Every improvement
-      so far came from making the simulation more like the telescope, and each one was forced by a specific failure.
+      A CNN learns to tell stars from galaxies using simulated stars injected into real SDSS sky, then gets tested
+      on real stars it has never seen. The question is which parts of the simulation actually make that work. The answer
+      turned out to be different from what we built for.
     </p>
     <div class="links">
       <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/10_Convolutions_and_Galaxies">Code</a>
     </div>
   </header>
 
-  <!-- ===================== THE GAP ===================== -->
-  <section id="gap">
-    <h2>The gap to close</h2>
+  <!-- ===================== SCORECARD ===================== -->
+  <section>
     <div class="stat-row">
-      <div class="stat"><div class="v">79.5%</div><div class="l">real stars: floor set by a simple size cut</div></div>
-      <div class="stat"><div class="v">82.3%</div><div class="l">real stars: CNN trained on our simulated stars</div></div>
-      <div class="stat"><div class="v">95.3%</div><div class="l">real stars: ceiling, the same CNN trained on real stars</div></div>
-      <div class="stat"><div class="v">1%</div><div class="l">of catalog galaxies at r = 20–21 called "galaxy"</div></div>
+      <div class="stat"><div class="v">79.5%</div><div class="l">floor: a simple size cut</div></div>
+      <div class="stat"><div class="v">77.8%</div><div class="l">simulated training at the start of the final arc</div></div>
+      <div class="stat"><div class="v">92.6%</div><div class="l">now, with real star colors and faint galaxies</div></div>
+      <div class="stat"><div class="v">97.6%</div><div class="l">ceiling: the same CNN trained on real stars</div></div>
     </div>
-    <p class="prose">The 13 points between simulated and real training measure what the simulation is still missing. On
-      real SDSS fields there is a second gap. The network calls catalog stars "star" 97–100% of the time, but it calls
-      only 42%, 4% and 1% of catalog galaxies "galaxy" at r = 18–19, 19–20 and 20–21. Its training galaxies are all
-      large and bright, so to the network "small and faint" means "star."</p>
+    <p class="prose muted">Real-star accuracy, mean of 10 training seeds. On stars found in real SDSS fields, the share called
+      "star" rose from 44% to 87%.</p>
+  </section>
+
+  <!-- ===================== LADDER ===================== -->
+  <section id="ladder">
+    <h2>The ladder: adding ingredients one at a time</h2>
     <figure class="fig">
-      <a class="zoom" href="img/step3_gallery.png"><img src="img/step3_gallery.png" alt="Test images from faint to bright with the classifier's predictions" loading="lazy"></a>
-      <figcaption><b>Faint to bright.</b> Real galaxies, simulated stars on real sky, and real SDSS stars, with the
-        probability and call from a network trained on real stars.</figcaption>
+      <a class="zoom" href="img/fa0_strip.png"><img src="img/fa0_strip.png" alt="One simulated star at each rung of the ladder, with radial profiles, next to a real SDSS star" loading="lazy"></a>
+      <figcaption><b>One star at every rung,</b> from a bare Moffat profile on Gaussian noise to the full forward model,
+        all at the same flux as the real SDSS star on the right. Bottom row: radial profile (blue) against the real star's
+        (dashed). Diffraction and turbulence (rungs 3–4) are what fix the wings.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/fa0_ladder.png"><img src="img/fa0_ladder_web.png" alt="Real-star accuracy for each rung of the simulation ladder" loading="lazy"></a>
+      <figcaption><b>Real-star accuracy by rung</b> (10 seeds each), between the size-cut floor and the real-trained
+        ceiling. Two surprises. On Gaussian sky (rungs 0–1) every real star is called a galaxy, because the network
+        learns "real sky means galaxy." And the 93% at rung 5 is a mirage: until rung 6 the galaxies came from an
+        older SDSS processing (DR7), which a network can tell apart from DR16 images on its own. Once the galaxies are
+        DR16 too, that shortcut is gone and honest accuracy settles near 78%.</figcaption>
     </figure>
   </section>
 
-  <!-- ===================== THE SIMULATION ===================== -->
-  <section id="telescope">
-    <h2>Building the telescope, one failure at a time</h2>
-    <p class="prose">Each card is an ingredient of the forward model and the failure, or the check, that put it there.</p>
+  <!-- ===================== REMOVAL TEST ===================== -->
+  <section id="removal">
+    <h2>The removal test: which ingredients are needed?</h2>
+    <p class="prose">Start from the full model and take out one ingredient at a time, 10 seeds each. The bar was set before
+      any of these runs: an ingredient counts as necessary only if removing it moves real-star accuracy by more than
+      <b>6.7 points</b>, twice the seed-to-seed scatter.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/fa1_necessity.png"><img src="img/fa1_necessity.png" alt="Necessity matrix: accuracy shift when each ingredient is removed, for each real test set" loading="lazy"></a>
+      <figcaption><b>The necessity matrix.</b> Rows: the ingredient removed. Columns: real test sets, plus the simulated test
+        as a control. Boxed cells are beyond the bar.
+        <b>Real sky</b> is indispensable: without it every real star is called a galaxy. So is <b>brightness matching</b>: without it
+        faint real galaxies collapse to 18%.
+        Removing <b>DR16 galaxies</b> <i>raises</i> real-star accuracy, by bringing back the DR7 shortcut, so it reads as harmful
+        here but is the honest choice.
+        Most of the optics built from first principles (pupil diffraction, vanes, halo, saturation) are <b>decoration</b>
+        for this task: inside the bar on every star column.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== ATTRIBUTION ===================== -->
+  <section>
+    <h2>What the network looks at</h2>
+    <figure class="fig">
+      <a class="zoom" href="img/fa2_attribution.png"><img src="img/fa2_attribution.png" alt="Occlusion and integrated-gradient maps for stars, galaxies, cosmic rays and trails" loading="lazy"></a>
+      <figcaption><b>Attribution maps</b> for a bright and a faint example of each object, with occlusion (cover a patch, watch
+        P(star) change) and integrated gradients. Red is evidence for "star", blue for "galaxy". For point sources the
+        evidence sits on the core and the PSF wings, not the background. The faint real star at the top right is called
+        a star with less confidence (P = 0.76): its occlusion map shows galaxy evidence in the wings.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== FAINT GALAXIES ===================== -->
+  <section id="faint">
+    <h2>The missing galaxies: artificial redshifting</h2>
+    <p class="prose">Every training galaxy was a large, bright Galaxy Zoo galaxy. On real fields an earlier five-class
+      classifier called only 1% of catalog galaxies at r = 20–21 "galaxy": to it, small and faint meant star. The fix is to
+      move each galaxy to a higher redshift: shrink it by the ratio of angular-diameter distances, dim it as (1+z)⁴, add the PSF
+      blur the shrunk image is missing, and put the sky noise back.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/fa3_redshift_strip.png"><img src="img/fa3_redshift_strip.png" alt="One spiral galaxy artificially redshifted from z = 0.03 to 0.5" loading="lazy"></a>
+      <figcaption><b>One spiral, from z = 0.03 to z = 0.5,</b> fading into a dot. Top: the network before, which calls it a star at
+        z = 0.1. Middle and bottom: after training with redshifted galaxies, it is a galaxy all the way out. Redshifted test galaxies
+        called "galaxy" rose from 84% to 98%. The first attempt cost 9 points on real stars. Redshifting the stars too, so that
+        shrinking itself isn't a tell, cut the cost to 3–4 points, inside the bar.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== STAR COLORS ===================== -->
+  <section id="colors">
+    <h2>The real missing ingredient: star colors</h2>
+    <p class="prose">Stars found in real SDSS fields were still called "star" only about half the time. Brightness and saturation
+      explained only part of it, and a JPEG artifact test came back negative. The clearest difference was color: at matched
+      flux, field-star cores are far redder than the test stars' (ln(i/g) of 1.13 against 0.06). The simulated stars drew their
+      colors from blackbodies between 3000 and 12000 K, and real field stars are much redder than that.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/fa4_star_colors.png"><img src="img/fa4_star_colors.png" alt="Star color distributions: simulated, real field stars, spectroscopic stars and SDSS photometric stars" loading="lazy"></a>
+      <figcaption><b>Left:</b> core color of the simulated training stars (blue) against real field stars (orange). The
+        simulation is far too blue. <b>Right:</b> SDSS catalog colors. The test stars (spectroscopic, gray) are mostly blue, but
+        the general star population (green) has a large red, M-dwarf peak. The fix: draw star colors from 5399 real SDSS
+        stars instead of blackbodies.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/fa4_catcolors.png"><img src="img/fa4_catcolors.png" alt="Accuracy with blackbody vs catalog star colors on each test set" loading="lazy"></a>
+      <figcaption><b>Blackbody (gray) against catalog colors (blue).</b> Right panel, with the faint-galaxy fixes: real test
+        stars <b>75.0% → 92.6%</b>, stars in real fields <b>44% → 87%</b>, with every galaxy column holding. Left panel: without
+        the redshifted galaxies, the color fix costs faint-galaxy accuracy. The two ingredients need each other.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== BLENDS ===================== -->
+  <section>
+    <h2>Several objects per image</h2>
+    <figure class="fig">
+      <a class="zoom" href="img/fa4_blends.png"><img src="img/fa4_blends.png" alt="Segmentation of a star moving onto a galaxy, and star recovery against offset" loading="lazy"></a>
+      <figcaption><b>Segmentation.</b> A U-Net labels every pixel as sky, galaxy, star or artifact. Here a star is slid onto a
+        galaxy. Stars are found when they sit more than about 2.3 PSF widths from the galaxy center, and mostly lost closer in.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/step7a_fields.png"><img src="img/step7a_fields.png" alt="Four SDSS fields with every detected source labelled by the classifier" loading="lazy"></a>
+      <figcaption><b>Detect, then classify,</b> on real 72″ SDSS fields: every source labeled with its call and probability.
+        Labeling noise as "empty sky", "trail" or "cosmic ray" removes most false detections while keeping 94% of real catalog
+        objects.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== HISTORY ===================== -->
+  <section id="history">
+    <h2>How it started: building the telescope</h2>
+    <p class="prose">Before the final arc, each ingredient went in because of a specific failure or check. The removal test
+      above later showed which of them the classifier actually needs.</p>
     <div class="ledger">
       <div class="row"><div class="rung"><span>Step 2a</span></div><div class="ing">Stars and artifacts injected into real sky</div>
         <div class="fail">Checked by <b>injection and recovery: unbiased to &lt;1% in size and flux</b>, with sky noise and patchiness matching real empty corners.</div></div>
@@ -75,70 +173,42 @@
         <div class="fail">The 2.5 m pupil with its vanes, plus Kolmogorov seeing. <b>The PSF is wider in g than in i by 1.093</b>; turbulence theory predicts 1.098.</div></div>
       <div class="row"><div class="rung"><span>Step 3</span></div><div class="ing">Galaxies refetched from DR16</div>
         <div class="fail">Without it: <b>a network told DR7-era images from DR16 ones 98% of the time.</b> After the fix, a control scores 49.9%, which is chance.</div></div>
-      <div class="row"><div class="rung"><span>Step 3</span></div><div class="ing">Stretch recalibrated on catalog fluxes; saturation that keeps color</div>
+      <div class="row"><div class="rung"><span>Step 3</span></div><div class="ing">Stretch recalibrated; saturation that keeps color</div>
         <div class="fail">Without it: <b>bright simulated stars burn out white</b>, while real ones keep their color.</div></div>
-      <div class="row new"><div class="rung"><span>Step 3</span></div><div class="ing">JPEG color mapping, PSF halo, vane width</div>
-        <div class="fail">The image pipeline <b>compresses colors</b> (slope 0.81 against the catalog), real stars have a broad halo, and the vane spikes are much weaker than assumed. Fitting all three: <b>real stars 73.5% → 82.3%.</b></div></div>
+      <div class="row"><div class="rung"><span>Step 3</span></div><div class="ing">JPEG color mapping, PSF halo, vane width</div>
+        <div class="fail">The image pipeline <b>compresses colors</b> (slope 0.81 against the catalog), real stars have a broad halo, and the vane spikes are much weaker than assumed.</div></div>
+    </div>
+    <div class="two" style="margin-top:24px">
+      <figure class="fig">
+        <a class="zoom" href="img/step2b_optics.png"><img src="img/step2b_optics.png" alt="SDSS pupil, diffraction pattern, speckles, long exposure and recorded star" loading="lazy"></a>
+        <figcaption><b>A star, built from the telescope up:</b> pupil, diffraction, one turbulent short exposure, the long-exposure
+          average, and the star as SDSS records it.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/step3_psffix.png"><img src="img/step3_psffix.png" alt="Real bright stars compared with simulated stars before and after the fit" loading="lazy"></a>
+        <figcaption><b>Real against simulated bright stars,</b> before and after fitting the color gains, halo and vanes.</figcaption>
+      </figure>
     </div>
 
-    <figure class="fig" style="margin-top:28px">
-      <a class="zoom" href="img/step2b_optics.png"><img src="img/step2b_optics.png" alt="SDSS pupil, diffraction pattern, speckles, long exposure and recorded star" loading="lazy"></a>
-      <figcaption><b>A star, built from the telescope up.</b> The SDSS pupil (2.5 m mirror, secondary, four vanes), its
-        diffraction pattern, one short exposure through turbulence (speckles), the long-exposure average, and the star as
-        SDSS records it.</figcaption>
-    </figure>
-    <figure class="fig">
-      <a class="zoom" href="img/step3_psffix.png"><img src="img/step3_psffix.png" alt="Real bright stars compared with simulated stars before and after the fit" loading="lazy"></a>
-      <figcaption><b>Real against simulated, bright stars.</b> Top: real SDSS stars. Middle: the simulation before the
-        fit, too compact, with spikes and washed-out color. Bottom: after fitting the color gains, halo and vanes, with
-        saturation that keeps color.</figcaption>
-    </figure>
-  </section>
-
-  <!-- ===================== WHAT IT LEARNED ===================== -->
-  <section id="learned">
-    <h2>What the networks learned along the way</h2>
-
-    <div class="step-head"><h3>Shape carries color: red spirals are edge-on</h3><span class="chip done">step 4</span></div>
-    <figure class="fig">
-      <a class="zoom" href="img/step4_offdiagonal.png"><img src="img/step4_offdiagonal.png" alt="Red spirals and blue ellipticals with color predicted from shape alone" loading="lazy"></a>
-      <figcaption>A grayscale network can still predict galaxy color 78% of the time (92% with color images). Part of the
-        reason: <b>red spirals are mostly seen edge-on</b>, reddened by their own dust. The red fraction of spirals falls
-        from 67% edge-on to 43% face-on.</figcaption>
-    </figure>
-
+    <h3 style="margin:12px 0 14px">Along the way</h3>
     <div class="two">
       <figure class="fig">
-        <a class="zoom" href="img/step5_ood.png"><img src="img/step5_ood.png" alt="Out-of-distribution score histograms and ROC curves" loading="lazy"></a>
-        <figcaption><b>Known or unknown?</b> <span class="chip done">step 5</span> The five-class network (galaxy, star,
-          cosmic ray, satellite trail, empty sky) scores 98.9%. With cosmic rays held out of training, the simplest
-          score, the maximum softmax, still flags them as unknown with AUROC 0.95.</figcaption>
+        <a class="zoom" href="img/step4_offdiagonal.png"><img src="img/step4_offdiagonal.png" alt="Red spirals and blue ellipticals with color predicted from shape alone" loading="lazy"></a>
+        <figcaption><b>Shape carries color.</b> A grayscale network predicts galaxy color 78% of the time, partly because red spirals
+          are mostly seen edge-on: the red fraction of spirals falls from 67% edge-on to 43% face-on.</figcaption>
       </figure>
       <figure class="fig">
-        <a class="zoom" href="img/step6_accuracy.png"><img src="img/step6_accuracy.png" alt="Quasar vs star accuracy by input" loading="lazy"></a>
-        <figcaption><b>Quasars vs stars.</b> <span class="chip done">step 6</span> Both are point sources, so color does
-          the work: 86% from color images, 70% in grayscale, and 95% from catalog u/g/r/i colors. The "shape-only"
-          network's 63.5% turns out to be leftover color in the JPEG profiles, not morphology.</figcaption>
+        <a class="zoom" href="img/step5_ood.png"><img src="img/step5_ood.png" alt="Out-of-distribution score histograms and ROC curves" loading="lazy"></a>
+        <figcaption><b>Known or unknown?</b> A five-class network (galaxy, star, cosmic ray, trail, empty sky) scores 98.9%. With
+          cosmic rays held out of training, the max-softmax score still flags them as unknown with AUROC 0.95.</figcaption>
       </figure>
     </div>
-  </section>
-
-  <!-- ===================== REAL FIELDS ===================== -->
-  <section id="fields">
-    <h2>Real fields</h2>
-    <figure class="fig">
-      <a class="zoom" href="img/step7a_fields.png"><img src="img/step7a_fields.png" alt="Four SDSS fields with every detected source labelled by the classifier" loading="lazy"></a>
-      <figcaption><b>Detect, then classify.</b> <span class="chip done">step 7a</span> Every source in four 72″ SDSS fields,
-        labeled with the classifier's call and probability. Across 300 fields, 1859 detections: calling noise "empty sky",
-        "trail" or "cosmic ray" removes most false detections while keeping 94% of real catalog objects.</figcaption>
-    </figure>
   </section>
 
   <section id="next">
     <h2>Coming</h2>
-    <div class="callout prose"><p>A removal test for every forward-model ingredient; faint galaxies made by artificially
-      redshifting bright ones until they become dots, the missing ingredient behind the 1%; and an anomaly hunt for the
-      strangest objects in the real sky.</p></div>
+    <div class="callout prose"><p>An anomaly hunt: every detection in 300 real SDSS fields ranked by how unfamiliar it looks to the
+      network, and a gallery of the strangest things it finds.</p></div>
   </section>
 </main>
 

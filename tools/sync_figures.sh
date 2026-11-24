@@ -23,7 +23,14 @@ $S/rung4b_ignition/plots/stellar_ignition.gif         solar-system/img/stellar_i
 $S/rung5_planet_formation/plots/formation/formation.gif solar-system/img/formation.gif
 07_Stat_Mech_and_Ising/checks/plots/kt_step2_vortices.png defects/img/kt_vortices.png
 07_Stat_Mech_and_Ising/checks/plots/kt_quench.png     defects/img/kt_quench.png
-10_Convolutions_and_Galaxies/results/step3_gallery.png sky-classifier/img/step3_gallery.png
+10_Convolutions_and_Galaxies/results/finalarc_step0_strip.png sky-classifier/img/fa0_strip.png
+10_Convolutions_and_Galaxies/results/finalarc_step0_ladder.png sky-classifier/img/fa0_ladder.png
+10_Convolutions_and_Galaxies/results/finalarc_step1_necessity.png sky-classifier/img/fa1_necessity.png
+10_Convolutions_and_Galaxies/results/finalarc_step2_gallery.png sky-classifier/img/fa2_attribution.png
+10_Convolutions_and_Galaxies/results/finalarc_step3_redshift_strip.png sky-classifier/img/fa3_redshift_strip.png
+10_Convolutions_and_Galaxies/results/finalarc_star_colors.png sky-classifier/img/fa4_star_colors.png
+10_Convolutions_and_Galaxies/results/finalarc_step4_catcolors.png sky-classifier/img/fa4_catcolors.png
+10_Convolutions_and_Galaxies/results/finalarc_step4_blends.png sky-classifier/img/fa4_blends.png
 10_Convolutions_and_Galaxies/results/step7a_fields.png sky-classifier/img/step7a_fields.png
 07_Stat_Mech_and_Ising/checks/plots/kt_step3_transition.png defects/img/kt_transition.png
 07_Stat_Mech_and_Ising/checks/plots/kt_correlations.png defects/img/kt_correlations.png
@@ -39,4 +46,6 @@ FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; p
 "$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kt_quench.gif" \
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 32 "$DST/defects/img/kt_quench.mp4"
 
+# Compact web version of the classifier ladder (accuracy row + rung labels)
+"$HOME/anaconda3/envs/HaloPipeline/bin/python" "$DST/tools/crop_ladder.py" "$DST/sky-classifier/img/fa0_ladder.png" "$DST/sky-classifier/img/fa0_ladder_web.png"
 echo "synced to $DST"
