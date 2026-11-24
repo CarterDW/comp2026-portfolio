@@ -36,6 +36,12 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 10_Convolutions_and_Galaxies/results/step4_offdiagonal.png sky-classifier/img/step4_offdiagonal.png
 10_Convolutions_and_Galaxies/results/step5_ood.png sky-classifier/img/step5_ood.png
 10_Convolutions_and_Galaxies/results/step6_accuracy.png sky-classifier/img/step6_accuracy.png
+Gravity_Golf/results/render_demo.png gravity-golf/img/render_demo.png
+Gravity_Golf/results/step1_landscape.png gravity-golf/img/step1_landscape.png
+Gravity_Golf/results/step1b_longflight.png gravity-golf/img/step1b_longflight.png
+Gravity_Golf/results/step2_cma_budget.png gravity-golf/img/step2_cma_budget.png
+Gravity_Golf/results/step3_learning.png gravity-golf/img/step3_learning.png
+Gravity_Golf/results/step3_strip_floor_wide.png gravity-golf/img/step3_strip_floor_wide.png
 LIST
 
 # GIF -> MP4 for movies too big to ship as GIFs (ffmpeg from imageio-ffmpeg in HaloPipeline)
@@ -53,4 +59,13 @@ done
 
 # Compact web version of the classifier ladder (accuracy row + rung labels)
 "$HOME/anaconda3/envs/HaloPipeline/bin/python" "$DST/tools/crop_ladder.py" "$DST/sky-classifier/img/fa0_ladder.png" "$DST/sky-classifier/img/fa0_ladder_web.png"
+# Gravity golf: hub thumbnail cropped from the rendered course
+"$HOME/anaconda3/envs/HaloPipeline/bin/python" - "$DST" <<'PY'
+import sys
+from PIL import Image
+d = sys.argv[1]
+im = Image.open(f"{d}/gravity-golf/img/render_demo.png").convert("RGB")
+W, H = im.size
+im.crop((int(.12*W), int(.18*H), int(.92*W), int(.78*H))).resize((800, 600), Image.LANCZOS).save(f"{d}/assets/thumb-golf.jpg", quality=86)
+PY
 echo "synced to $DST"

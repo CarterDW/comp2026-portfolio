@@ -117,3 +117,5 @@ body.space .chip.running { color: #f0cf84; border-color: #5e4c22; background: #2
 body.space .fig a.zoom { border-color: rgba(255, 255, 255, .12); }   /* figures stay on white: matplotlib output */
 body.space .project:hover, body.space .card:hover { border-color: var(--accent); }
 body.space .method div { border-top-color: var(--accent); }
+
+.subhead { font-size: 18px; color: var(--muted); margin: 34px 0 14px; font-weight: 600; }
