@@ -109,3 +109,11 @@ table.knobs th { color: var(--muted); font-weight: 500; font-size: 13.5px; }
   .todo-list li { grid-template-columns: 1fr; gap: 4px; }
   table.knobs { font-size: 14px; }
 }
+
+/* space theme (body.space, set on every page): dark versions of the light-only colors */
+body.space .chip { background: rgba(255, 255, 255, .04); }
+body.space .chip.done { color: #8fdcb2; border-color: #2f5e45; background: #132a22; }
+body.space .chip.running { color: #f0cf84; border-color: #5e4c22; background: #2a2414; }
+body.space .fig a.zoom { border-color: rgba(255, 255, 255, .12); }   /* figures stay on white: matplotlib output */
+body.space .project:hover, body.space .card:hover { border-color: var(--accent); }
+body.space .method div { border-top-color: var(--accent); }
