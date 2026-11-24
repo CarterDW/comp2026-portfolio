@@ -18,9 +18,6 @@ $S/final_arc/plots/gr_mercury.png                     solar-system/img/gr_mercur
 $S/rung6_terrestrial/plots/genealogy_seed7_pl200.png  solar-system/img/genealogy_seed7.png
 $S/rung6_terrestrial/plots/terrestrial_systems.png    solar-system/img/systems_embryos_only.png
 $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/systems_with_swarm.png
-$S/rung4_protostar_disk/plots/collapse_to_disk.gif    solar-system/img/collapse_to_disk.gif
-$S/rung4b_ignition/plots/stellar_ignition.gif         solar-system/img/stellar_ignition.gif
-$S/rung5_planet_formation/plots/formation/formation.gif solar-system/img/formation.gif
 07_Stat_Mech_and_Ising/checks/plots/kt_step2_vortices.png defects/img/kt_vortices.png
 07_Stat_Mech_and_Ising/checks/plots/kt_quench.png     defects/img/kt_quench.png
 10_Convolutions_and_Galaxies/results/finalarc_step0_strip.png sky-classifier/img/fa0_strip.png
@@ -45,6 +42,14 @@ LIST
 FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())")
 "$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kt_quench.gif" \
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 32 "$DST/defects/img/kt_quench.mp4"
+
+# Solar movies: GIF -> MP4 (+ first-frame poster). crf chosen per movie; the particle-heavy collapse needs 33.
+for spec in "rung4_protostar_disk/plots/collapse_to_disk 33" "rung4b_ignition/plots/stellar_ignition 26" "rung5_planet_formation/plots/formation/formation 26"; do
+  set -- $spec; name=$(basename "$1")
+  "$FF" -loglevel error -y -i "$SRC/$S/$1.gif" -movflags +faststart -pix_fmt yuv420p \
+    -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -preset slow -tune stillimage -crf "$2" "$DST/solar-system/img/$name.mp4"
+  "$FF" -loglevel error -y -i "$SRC/$S/$1.gif" -vf "select=eq(n\\,0)" -frames:v 1 -update 1 "$DST/solar-system/img/${name}_poster.jpg"
+done
 
 # Compact web version of the classifier ladder (accuracy row + rung labels)
 "$HOME/anaconda3/envs/HaloPipeline/bin/python" "$DST/tools/crop_ladder.py" "$DST/sky-classifier/img/fa0_ladder.png" "$DST/sky-classifier/img/fa0_ladder_web.png"
