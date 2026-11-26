@@ -28,6 +28,7 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 10_Convolutions_and_Galaxies/results/finalarc_star_colors.png sky-classifier/img/fa4_star_colors.png
 10_Convolutions_and_Galaxies/results/finalarc_step4_catcolors.png sky-classifier/img/fa4_catcolors.png
 10_Convolutions_and_Galaxies/results/finalarc_step4_blends.png sky-classifier/img/fa4_blends.png
+10_Convolutions_and_Galaxies/results/finalarc_step5_gallery.png sky-classifier/img/fa5_anomalies.png
 10_Convolutions_and_Galaxies/results/step7a_fields.png sky-classifier/img/step7a_fields.png
 07_Stat_Mech_and_Ising/checks/plots/kt_step3_transition.png defects/img/kt_transition.png
 07_Stat_Mech_and_Ising/checks/plots/kt_correlations.png defects/img/kt_correlations.png

@@ -23,6 +23,7 @@
       <li><a href="#removal">Removal test</a></li>
       <li><a href="#faint">Faint galaxies</a></li>
       <li><a href="#colors">Star colors</a></li>
+      <li><a href="#anomalies">Anomalies</a></li>
       <li><a href="#history">How it started</a></li>
     </ul>
   </div>
@@ -160,6 +161,26 @@
     </figure>
   </section>
 
+  <!-- ===================== ANOMALIES ===================== -->
+  <section id="anomalies">
+    <h2>The strangest things in 300 SDSS fields</h2>
+    <p class="prose">Every one of the 1,859 detections in the real fields is scored by how unfamiliar it looks to the final
+      classifier. Each score's threshold flags 5% of simulated objects, and on held-out simulated objects it flags 4–6%, as it
+      should. Two lessons came before any discoveries. First, the network judges the whole 24″ window, so a faint detection
+      beside a bright red neighbor looks strange. Ranking only detections that are the brightest thing in their own window fixes
+      that. Second, the two scores built on the output probabilities (max-softmax and energy) mostly find faint sources at the
+      detection limit. For a star-or-galaxy network they measure <i>ambiguity</i>, not strangeness. The feature-space score
+      (Mahalanobis distance) finds the odd objects.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/fa5_anomalies.png"><img src="img/fa5_anomalies.png" alt="Gallery of the top-ranked anomalies, grouped by what they are: moving objects, bright stars, edge-on galaxies, neighbors and faint sources" loading="lazy"></a>
+      <figcaption><b>The top 50 by Mahalanobis distance, sorted by eye:</b> 18 neighbors, pairs or superpositions, 16 bright
+        stars with saturated, color-shifted cores, 11 large or edge-on galaxies, and 3 moving objects. The top-left object is an
+        <b>asteroid</b>: SDSS takes the r, i and g images minutes apart, so a moving rock shows up as separate green, red and
+        blue dots. SDSS's own catalog lists it as a star, and the network agrees with P(star) = 0.97. Only the anomaly score
+        notices. The bottom row is what max-softmax and energy rank highest: faint sources the network can't call either way.</figcaption>
+    </figure>
+  </section>
+
   <!-- ===================== HISTORY ===================== -->
   <section id="history">
     <h2>How it started: building the telescope</h2>
@@ -206,8 +227,8 @@
 
   <section id="next">
     <h2>Coming</h2>
-    <div class="callout prose"><p>An anomaly hunt: every detection in 300 real SDSS fields ranked by how unfamiliar it looks to the
-      network, and a gallery of the strangest things it finds.</p></div>
+    <div class="callout prose"><p>An interactive browser for the 300 real fields: every detection with its call, its probability
+      and its anomaly scores.</p></div>
   </section>
 </main>
 

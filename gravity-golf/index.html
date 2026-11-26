@@ -55,8 +55,8 @@
     <div class="stat-row">
       <div class="stat"><div class="v">0.8%</div><div class="l">of random shots sink</div></div>
       <div class="stat"><div class="v">~100</div><div class="l">shots CMA-ES needs to sink 83% of courses</div></div>
-      <div class="stat"><div class="v">85%</div><div class="l">sunk by the policy in one shot (1–2 planets)</div></div>
-      <div class="stat"><div class="v">6–10%</div><div class="l">on 3–4 planet courses it never trained on</div></div>
+      <div class="stat"><div class="v">85–94%</div><div class="l">sunk by the policy in one shot (1–2 planets, 3 seeds)</div></div>
+      <div class="stat"><div class="v">5–9%</div><div class="l">on 3–4 planet courses it never trained on</div></div>
     </div>
   </section>
 
@@ -105,10 +105,11 @@
       is trained by policy gradient on a stream of random courses, then tested on courses it has never seen.</p>
     <figure class="fig">
       <a class="zoom" href="img/step3_learning.png"><img src="img/step3_learning.png" alt="Learning curves for several training runs, with CMA-ES reference lines" loading="lazy"></a>
-      <figcaption><b>Learning curves.</b> Right panel: held-out courses sunk by the policy's single shot. The wide network
-        (purple, 3 layers of 512) climbs past the CMA-ES-with-100-shots line, at <b>85% on 1–2 planet courses</b>
-        (100% with no planets, 95% with one, 74% with two). Most runs with a smaller network stall near 28%, stuck on a
-        "fast straight shot" that ignores the planets.</figcaption>
+      <figcaption><b>Learning curves.</b> Right panel: held-out courses sunk by the policy's single shot. All three seeds of the
+        wide network (purple, gold and brown; 3 layers of 512) climb past the CMA-ES-with-100-shots line, at <b>85%, 94% and
+        93% on 1–2 planet courses</b>. The best seed sinks 98% of one-planet and 90% of two-planet courses. With a smaller
+        network, three of four runs stall near 28%, stuck on a "fast straight shot" that ignores the planets. The fourth (green)
+        escapes to 78%, so the plateau is a trap a run can fall into, not a ceiling of the small network.</figcaption>
     </figure>
     <figure class="fig">
       <a class="zoom" href="img/step3_strip_floor_wide.png"><img src="img/step3_strip_floor_wide.png" alt="The policy's shots on four courses at five points in training" loading="lazy"></a>
