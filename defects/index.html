@@ -12,6 +12,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="stylesheet" href="../assets/portfolio.css">
+  <style>
+    .atlas { display: grid; grid-template-columns: 110px repeat(4, minmax(0, 1fr)); gap: 12px; align-items: start; }
+    .atlas .rowlab { font-weight: 600; align-self: center; font-size: 15px; }
+    .atlas .collab { font-size: 13px; color: var(--muted); text-align: center; }
+    .atlas a.cell, .atlas div.cell { display: block; text-decoration: none; color: inherit; border: 1px solid var(--line);
+      border-radius: var(--radius, 10px); overflow: hidden; background: var(--surface); }
+    .atlas a.cell:hover { border-color: var(--accent); }
+    .atlas .cell img { display: block; width: 100%; aspect-ratio: 1; image-rendering: pixelated; }
+    .atlas .cell .t { font-weight: 600; font-size: 13px; padding: 6px 8px 0; }
+    .atlas .cell .c { font-size: 12px; color: var(--muted); padding: 2px 8px 8px; }
+    .atlas div.cell { opacity: .6; }
+    @media (max-width: 860px) { .atlas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .atlas .rowlab, .atlas .collab, .atlas .blank { display: none; } }
+  </style>
 </head>
 <body class="space">
 
@@ -19,15 +33,12 @@
   <div class="nav-inner">
     <a class="brand" href="../">Portfolio</a>
     <ul>
+      <li><a href="#atlas">The atlas</a></li>
+      <li><a href="#growth">Growth laws</a></li>
       <li><a href="#knobs">The knobs</a></li>
-      <li><a href="#vortices">Vortices</a></li>
-      <li><a href="#walls">Walls</a></li>
-      <li><a href="#coarsening">Coarsening</a></li>
-      <li><a href="#cosmo">Expanding universe</a></li>
-      <li><a href="#vortices-kz">Vortex KZ</a></li>
-      <li><a href="#vortex-coarsening">Vortex annihilation</a></li>
-      <li><a href="#strings">Strings</a></li>
-      <li><a href="#next">Coming</a></li>
+      <li><a href="kibble-zurek.html">Kibble–Zurek</a></li>
+      <li><a href="dynamics.html">Coarsening</a></li>
+      <li><a href="cosmology.html">Cosmology</a></li>
     </ul>
   </div>
 </nav>
@@ -41,12 +52,55 @@
     <p class="lede">
       When the early universe cooled through a symmetry-breaking transition, it left topological defects:
       domain walls, vortices and cosmic strings. Whether they are harmless, observable or fatal depends on
-      what the transition made and what happened to it afterwards.
+      what the transition made and what happened to it afterwards. One lattice engine and one field code, with
+      each knob turned in turn.
     </p>
     <div class="links">
       <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/07_Stat_Mech_and_Ising">Code</a>
     </div>
   </header>
+
+  <section id="atlas">
+    <h2>The defect atlas</h2>
+    <p class="prose">Two symmetries, four kinds of dynamics. Each cell shows its model at matched coarsening length,
+      a window eight of its own typical spacings wide, with its defect card. Click a cell for its story.
+      Symmetry picks the defect, the dynamics picks the growth law, and the cooling rate only sets the starting
+      point.</p>
+    <div class="atlas">
+      <div class="blank"></div>
+      <div class="collab">lattice, spin flips</div>
+      <div class="collab">lattice, spin swaps</div>
+      <div class="collab">relativistic field, flat space</div>
+      <div class="collab">relativistic field, expanding</div>
+      <div class="rowlab">Z₂: domain walls</div>
+      <a class="cell" href="dynamics.html#walls"><img src="img/atlas/z2_lattice.png" alt="Z₂ · lattice (Glauber) snapshot" loading="lazy"><div class="t">Z₂ · lattice (Glauber)</div><div class="c">ξ̂ ∝ τ<sub>Q</sub><sup>0.316</sup> · ℓ ∝ t<sup>½</sup> · walls coarsen away</div></a>
+      <a class="cell" href="dynamics.html#coarsening"><img src="img/atlas/z2_kawasaki.png" alt="Z₂ · lattice (Kawasaki) snapshot" loading="lazy"><div class="t">Z₂ · lattice (Kawasaki)</div><div class="c">conserved · ℓ ∝ t<sup>⅓</sup> · an alloy, not a cosmology</div></a>
+      <a class="cell" href="cosmology.html#cosmo"><img src="img/atlas/z2_flat.png" alt="Z₂ · relativistic, flat snapshot" loading="lazy"><div class="t">Z₂ · relativistic, flat</div><div class="c">walls at near light speed · reference</div></a>
+      <a class="cell" href="cosmology.html#cosmo"><img src="img/atlas/z2_expanding.png" alt="Z₂ · relativistic, expanding snapshot" loading="lazy"><div class="t">Z₂ · relativistic, expanding</div><div class="c">≈1.3 walls per horizon · Zel'dovich: fatal</div></a>
+      <div class="rowlab">U(1): vortices</div>
+      <a class="cell" href="dynamics.html#vortex-coarsening"><img src="img/atlas/u1_lattice.png" alt="U(1) · lattice (XY) snapshot" loading="lazy"><div class="t">U(1) · lattice (XY)</div><div class="c">n<sub>v</sub> ∝ ln t / t · pairs annihilate</div></a>
+      <div class="cell"><img src="img/atlas/u1_kawasaki.png" alt="U(1) · Kawasaki snapshot" loading="lazy"><div class="t">U(1) · Kawasaki</div><div class="c">not applicable: no conserved-current XY dynamics here</div></div>
+      <a class="cell" href="cosmology.html#vortices-field"><img src="img/atlas/u1_flat.png" alt="U(1) · relativistic, flat snapshot" loading="lazy"><div class="t">U(1) · relativistic, flat</div><div class="c">vortices per horizon keep rising · reference</div></a>
+      <a class="cell" href="cosmology.html#strings"><img src="img/atlas/u1_expanding.png" alt="U(1) · relativistic, expanding snapshot" loading="lazy"><div class="t">U(1) · relativistic, expanding</div><div class="c">≈1 string per horizon, climbing with the log: axions</div></a>
+    </div>
+    <figure class="fig" style="margin-top:18px">
+      <a class="zoom" href="img/kz_step11_atlas.png"><img src="img/kz_step11_atlas.png" alt="The defect atlas as one figure, with full defect cards" loading="lazy"></a>
+      <figcaption><b>The atlas as one figure,</b> with the full defect card under each cell: freeze-out, growth law,
+        late-time density and verdict.</figcaption>
+    </figure>
+  </section>
+
+  <section id="growth">
+    <h2>Every growth law on one plot</h2>
+    <p class="prose">Each model's typical defect spacing against time, rescaled so the curves meet where the spacing
+      first triples. Lattice walls grow as t<sup>½</sup>, conserved ones as t<sup>⅓</sup>, lattice vortices as
+      (t / ln t)<sup>½</sup>; relativistic defects in an expanding universe keep pace with the horizon, η.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step11_growth.png"><img src="img/kz_step11_growth.png" alt="Coarsening length against time for every model, rescaled, with the predicted growth laws" loading="lazy"></a>
+      <figcaption><b>The dynamics sets the exponent.</b> Solid: lattice models; dashed: relativistic fields; dotted:
+        the predicted laws.</figcaption>
+    </figure>
+  </section>
 
   <section id="knobs">
     <h2>Four knobs</h2>
@@ -62,234 +116,18 @@
     </table>
   </section>
 
-  <section id="vortices">
-    <h2>Warm-up: vortices and the Kosterlitz–Thouless transition</h2>
-    <p class="prose">Before quenching anything, the engine has to get the equilibrium physics of the 2D XY model right.
-      This model has no ordinary ordered phase. It still has a transition, at T<sub>KT</sub> ≈ 0.893, driven by
-      vortex–antivortex pairs unbinding. This warm-up is finished.</p>
-
-    <figure class="fig">
-      <div class="two" style="align-items:center">
-        <video src="img/kt_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
-        <figcaption style="margin:0"><b>A quench to T = 0.5.</b> Color is the spin angle, so each vortex is a point
-          where all the colors meet (black: +1, white: −1). Right after the quench the field is full of vortices. They find
-          partners and annihilate, and the colored domains grow. This is the coarsening that the final arc measures
-          for every model.</figcaption>
-      </div>
-    </figure>
-
-    <figure class="fig">
-      <a class="zoom" href="img/kt_quench.png"><img src="img/kt_quench.png" alt="Snapshots of a quenched XY model showing vortex annihilation" loading="lazy"></a>
-      <figcaption><b>Counting them.</b> 5424 vortices right after the quench, 10 by t = 5000 sweeps. The density
-        falls close to ln t / t, as expected for 2D XY coarsening under dissipative dynamics.</figcaption>
-    </figure>
-
-    <figure class="fig">
-      <a class="zoom" href="img/kt_transition.png"><img src="img/kt_transition.png" alt="Helicity modulus, vortex density and specific heat against temperature" loading="lazy"></a>
-      <figcaption><b>Finding the transition.</b> Left: the stiffness crosses the Nelson–Kosterlitz line 2T/π at 0.938
-        (L = 16) and 0.926 (L = 32), drifting toward 0.893 as L grows, slowly, as expected. Middle: the vortex density is
-        smooth through T<sub>KT</sub>, so counting vortices can't locate the transition. Right: the specific heat peaks
-        about 15% above T<sub>KT</sub>, not at it.</figcaption>
-    </figure>
-
-    <figure class="fig">
-      <a class="zoom" href="img/kt_errors.png"><img src="img/kt_errors.png" alt="Blocking analysis, stiffness against lattice size at T = 1.4, and eight repeat runs" loading="lazy"></a>
-      <figcaption><b>Are the error bars honest?</b> Above T<sub>KT</sub> (here T = 1.4) the stiffness should vanish, but at
-        L = 16 it came out 3.8σ from zero. Left: the blocked error plateaus by 2<sup>8</sup> sweeps (τ<sub>int</sub> ≈ 2
-        sweeps), so the runs are long enough. Middle: the stiffness falls to zero within errors at L = 32 and 64; the
-        L = 16 value is a finite-size effect, not a bug. Right: eight independent L = 16 runs agree (χ² = 5.2 for 7 dof),
-        and their replica-scatter and blocked errors match.</figcaption>
-    </figure>
-
-    <div class="two">
-      <figure class="fig">
-        <a class="zoom" href="img/kt_correlations.png"><img src="img/kt_correlations.png" alt="Spin correlations and the exponent eta against temperature" loading="lazy"></a>
-        <figcaption><b>The KT exponent.</b> Below T<sub>KT</sub>, correlations fall as power laws, and the exponent η reaches
-          1/4 at the transition, both fitted from G(r) and predicted from the measured stiffness. Above it they are no
-          longer power laws.</figcaption>
-      </figure>
-      <figure class="fig">
-        <a class="zoom" href="img/kt_vortices.png"><img src="img/kt_vortices.png" alt="Planted vortex pairs, Coulomb-gas energy, and an equilibrium vortex field" loading="lazy"></a>
-        <figcaption><b>Checking the vortex counter.</b> Planted pairs are found exactly. The pair energy follows the
-          Coulomb-gas law 4π ln s, which is the input to the KT argument. Right: an equilibrium field at T = 0.95.</figcaption>
-      </figure>
+  <section id="more">
+    <h2>Elsewhere in the project</h2>
+    <div class="buttons-row prose">
+      <p><a href="kibble-zurek.html"><b>Kibble–Zurek</b></a>: How many defects a cooling leaves: walls and vortices.</p>
+      <p><a href="dynamics.html"><b>Coarsening</b></a>: What happens next on the lattice: flips, swaps, annihilating vortices.</p>
+      <p><a href="cosmology.html"><b>Cosmology</b></a>: Relativistic walls, vortices and strings in an expanding universe.</p>
     </div>
-  </section>
-
-  <section id="walls">
-    <h2>Domain walls: the Ising quench</h2>
-    <p class="prose">The Z₂ story starts with a faster engine: a checkerboard update of the Ising model at 100 million
-      spin flips per second. It reproduces the exact Boltzmann distribution over all 65,536 states of a 4 × 4 lattice and the
-      exact energy of a 64 × 64 lattice. One trap, caught by watching the movie rather than the equilibrium checks: with the
-      usual Metropolis rule, a checkerboard flips every zero-cost spin of a sublattice at once, and the walls shrink
-      too fast (t<sup>−0.8</sup>). The heat-bath rule fixes it and recovers the textbook t<sup>−1/2</sup>.</p>
-    <figure class="fig">
-      <div class="two" style="align-items:center">
-        <video src="img/kz_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
-        <figcaption style="margin:0"><b>A quench to half the critical temperature.</b> A 512 × 512 lattice of random spins
-          (gold up, blue down, walls black) is dropped below T<sub>c</sub> and left alone for 2000 sweeps, with time
-          running logarithmically. Domains form within a few sweeps, then the walls straighten and shrink; whole domains
-          vanish. The wall density falls as t<sup>−1/2</sup>.</figcaption>
-      </div>
-    </figure>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_quench.png"><img src="img/kz_quench.png" alt="Four snapshots of Ising domains after a quench and the wall density against time" loading="lazy"></a>
-      <figcaption><b>Coarsening.</b> Four moments of the same quench (a quarter of the lattice), and the excess wall
-        density against time, which follows the Allen–Cahn law t<sup>−1/2</sup> for curvature-driven walls.</figcaption>
-    </figure>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step2_z.png"><img src="img/kz_step2_z.png" alt="Autocorrelation time against lattice size, Binder cumulant curves crossing at the critical point, and their scaling collapse" loading="lazy"></a>
-      <figcaption><b>Critical slowing down.</b> Near T<sub>c</sub> the system takes ever longer to forget its state.
-        Left: the autocorrelation time grows as L<sup>z</sup> with <b>z = 2.12 ± 0.03</b>, against the accepted 2.167; above
-        T<sub>c</sub> it doesn't grow at all. Middle: the Binder cumulants of four lattice sizes cross at T<sub>c</sub>, at the
-        universal value 0.611. Right: they fall on one curve when temperature is rescaled by L. This z sets how fast
-        a cooling system can keep up, and so how many walls a quench leaves behind: the Kibble–Zurek exponent is
-        1/(1 + z) = 0.32.</figcaption>
-    </figure>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step3.png"><img src="img/kz_step3.png" alt="Ising snapshots at freeze-out for four cooling rates, the correlation length along each ramp, and the Kibble–Zurek collapse" loading="lazy"></a>
-      <figcaption><b>Kibble–Zurek: how many walls a cooling leaves.</b> The lattice is cooled through T<sub>c</sub> at
-        rates spanning a factor of 1000. Close to T<sub>c</sub> it can't keep up, and the domain pattern freezes at a
-        size ξ̂ that grows only as the <b>0.316 ± 0.019 power</b> of the cooling time, exactly the Kibble–Zurek
-        prediction from z. Top: snapshots at the freeze-out time, each window 16 ξ̂ wide; scaled this way, a 30-sweep
-        quench and a 30,000-sweep one look alike. Bottom: the correlation length along every ramp (left) falls onto
-        one curve once length and time are rescaled (right). A cooling law like the early universe's, T ∝ t<sup>−1/2</sup>,
-        gives the same ξ̂ as a straight ramp with the same slope at T<sub>c</sub>: only that slope matters.</figcaption>
-    </figure>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step5.png"><img src="img/kz_step5.png" alt="Rescaled wall spacing along slow ramps, the surviving wall density against cooling time, and the ratio of the naive estimate to the survivors" loading="lazy"></a>
-      <figcaption><b>But the walls don't stay frozen.</b> Cool all the way to half of T<sub>c</sub> and count what is left.
-        Left: the wall spacing follows the Kibble–Zurek scaling up to the freeze-out time, then keeps growing as the walls
-        coarsen. Middle: the walls that survive fall as τ<sub>Q</sub><sup>−0.47</sup>, not −0.32. A two-stage model, Kibble–Zurek
-        at freeze-out and then ordinary coarsening, with both amplitudes taken from the steps above, predicts every point
-        to within about 20%. Right: the naive count overestimates the survivors, by 3.6× for the slowest cooling.</figcaption>
-    </figure>
-  </section>
-
-  <section id="coarsening">
-    <h2>After the quench: how walls disappear</h2>
-    <p class="prose">Once the walls exist, they coarsen. Under ordinary spin flips a wall moves to reduce its own curvature,
-      so a single circular domain shrinks at a steady rate in area and vanishes in a time ∝ R², and the typical domain
-      grows as t<sup>1/2</sup>. If the magnetization is conserved, as in an alloy separating, spins can only swap places,
-      walls move only by carrying material along them, and growth slows to t<sup>1/3</sup>. Same start, same temperature,
-      very different histories.</p>
-    <figure class="fig">
-      <div class="two" style="align-items:center">
-        <video src="img/kz_step4_sidebyside.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
-        <figcaption style="margin:0"><b>Spin flips (left) vs spin swaps (right).</b> One random start with exactly zero
-          magnetization, quenched to 0.7 T<sub>c</sub>, 256 × 256. With flips the domains merge until one color wins.
-          With swaps the total of each color is fixed, so the pattern can only coarsen slowly into a labyrinth.</figcaption>
-      </div>
-    </figure>
-    <div class="two">
-      <figure class="fig">
-        <a class="zoom" href="img/kz_step4_coarsening.png"><img src="img/kz_step4_coarsening.png" alt="Shrinking droplets, the growth law, dynamic scaling with Porod tail, and the outcomes of zero-temperature quenches" loading="lazy"></a>
-        <figcaption><b>The non-conserved checks.</b> Droplets of three sizes shrink on one curve once time is divided by
-          R² (t<sub>vanish</sub> ∝ R<sup>2.1</sup>). The structure factor collapses with the domain size and falls as
-          (kℓ)<sup>−3</sup>, the signature of sharp walls. Quenched to absolute zero, 37% of systems freeze into straight
-          stripes forever instead of reaching the ground state, close to the known one in three.</figcaption>
-      </figure>
-      <figure class="fig">
-        <a class="zoom" href="img/kz_step4_kawasaki.png"><img src="img/kz_step4_kawasaki.png" alt="Domain size against time for flips and swaps, and the effective exponent of swaps against inverse domain size" loading="lazy"></a>
-        <figcaption><b>Two growth laws.</b> Left: domain size for flips and swaps. Right: the swap model's growth exponent
-          creeps up slowly, and extrapolated to infinitely large domains it reaches <b>0.318</b>, against the
-          Lifshitz–Slyozov 1/3, the same slow approach Huse found in 1986.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section id="cosmo">
-    <h2>Walls in an expanding universe</h2>
-    <p class="prose">In the early universe the walls aren't spins on a lattice but a field obeying relativistic wave
-      equations, in a space that is expanding. Solved on an 8192 × 8192 grid, starting from the pattern the Kibble–Zurek
-      step predicts, the network keeps about one wall per horizon: the spacing grows almost in step with the horizon,
-      far faster than the lattice walls' t<sup>1/2</sup>. The measured growth, η<sup>0.87–0.90</sup>, is still a bit
-      short of the textbook η<sup>1</sup>; one run over a factor of three in time can't tell a slow approach to scaling
-      from a real difference. A network that keeps pace with the horizon eventually outweighs everything else: walls
-      with a tension of (1 TeV)³ would dominate the universe a couple of hours after the Big Bang. That is the
-      Zel'dovich problem, and why stable walls must be rare or absent.</p>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step6_walls.png"><img src="img/kz_step6_walls.png" alt="Snapshots of a domain-wall network with the horizon drawn, wall spacing against time compared with the Ising model, and a table of domination times" loading="lazy"></a>
-      <figcaption><b>Relativistic walls.</b> Top: the network at four times, each frame the whole box, with the horizon as
-        a dashed circle. Bottom left: wall spacing against time for radiation and matter eras and flat space (field), and the
-        lattice model's coarsening (black). Bottom right: when walls would come to dominate, for three wall tensions.</figcaption>
-    </figure>
-  </section>
-
-  <section id="vortices-kz">
-    <h2>Vortices: Kibble–Zurek with a logarithm</h2>
-    <p class="prose">The second half of the project repeats the story for vortices, the 2D cousins of cosmic strings.
-      Their transition (Kosterlitz–Thouless) has no ordinary critical exponent: the correlation length diverges
-      exponentially, so the Kibble–Zurek counting picks up logarithms. Cooled through the transition at rates spanning
-      a factor of 300, the vortices left behind fall roughly as τ<sub>Q</sub><sup>−0.7</sup>. But the apparent exponent
-      steepens with slower cooling, 0.70 → 0.79, and for the slower ramps the data follow ln(τ<sub>Q</sub>)/τ<sub>Q</sub>
-      better than any power law, as Jelić &amp; Cugliandolo predicted. A pure log form doesn't fit the fastest
-      ramps, though, which need an extra term.</p>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step7_xy.png"><img src="img/kz_step7_xy.png" alt="Remnant vortex density against cooling time with power-law and logarithmic fits, residuals, and phase snapshots with vortices" loading="lazy"></a>
-      <figcaption><b>The vortices left behind.</b> Top left: remnant vortex density at the end of the ramp, with one power
-        law (blue) and the logarithmic form (red; dotted: fitted to the slower ramps only); inset: the power-law exponent
-        fitted over one decade at a time, which drifts. Top right: residuals. Bottom: the spin angle as colour at the
-        moment of crossing T<sub>KT</sub> for three cooling times, with vortices (white) and antivortices (black).</figcaption>
-    </figure>
-  </section>
-
-  <section id="vortex-coarsening">
-    <h2>Vortices after the quench</h2>
-    <p class="prose">Quench the spins below the transition and the vortices pair up and annihilate. Because the pull
-      between a vortex and an antivortex weakens only logarithmically, and their drag grows with distance, the count
-      falls as ln(t)/t rather than a clean power law, and a single planted pair takes a time ∝ R² ln R to meet. Both
-      show up cleanly. In a relativistic field the same vortices behave differently: the number per horizon keeps
-      creeping up instead of settling.</p>
-    <figure class="fig">
-      <div class="two" style="align-items:center">
-        <video src="img/kz_step8_movie.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
-        <figcaption style="margin:0"><b>Vortex annihilation.</b> The spin angle as colour on a 256 × 256 lattice after a
-          quench to T = 0.3, with time running logarithmically to 10,000 sweeps; vortices are white, antivortices black.
-          Pairs find each other and vanish, and the colours spread into large smooth regions.</figcaption>
-      </div>
-    </figure>
-    <div class="two">
-      <figure class="fig">
-        <a class="zoom" href="img/kz_step8_xy.png"><img src="img/kz_step8_xy.png" alt="Snapshots of the quenched XY model, vortex density against time with two fits, and pair annihilation time against separation" loading="lazy"></a>
-        <figcaption><b>The lattice vortices.</b> Density against time: ln(t)/t fits (χ²/dof 0.4), 1/t doesn't (61).
-          One planted pair: annihilation time against initial separation follows R² ln R better than R².</figcaption>
-      </figure>
-      <figure class="fig">
-        <a class="zoom" href="img/kz_step9_vortices.png"><img src="img/kz_step9_vortices.png" alt="Relativistic vortex field snapshots with the horizon, vortices per horizon area against time compared with the lattice model, and a static vortex's energy" loading="lazy"></a>
-        <figcaption><b>The relativistic vortices.</b> The same symmetry in an expanding universe: vortices per horizon
-          area climb slowly with time (red), unlike the lattice model (black). Right: a single vortex's energy grows as
-          π v² ln R, the logarithm behind both behaviours.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section id="strings">
-    <h2>Cosmic strings in 3D</h2>
-    <p class="prose">In three dimensions the vortices become strings, the global strings of axion cosmology. Simulated on
-      a 512³ grid on the GPU, the network keeps roughly one string per Hubble volume as the universe expands, but the
-      number per horizon creeps upward with the logarithm of time, at 0.18 per unit of the log, close to the 0.22 found
-      in the large published simulations this setup follows. That slow climb matters: extrapolated over the ~70 units of
-      log to the real early universe, it sets how many axions the strings radiate.</p>
-    <figure class="fig">
-      <a class="zoom" href="img/kz_step10_strings.png"><img src="img/kz_step10_strings.png" alt="Three-dimensional renders of a global string network at three times with the horizon as a sphere, and the number of strings per horizon against the logarithm of time" loading="lazy"></a>
-      <figcaption><b>A string network growing up.</b> Top: every string in the box at three times, with the horizon as a
-        sphere; the network thins out as the horizon grows. Bottom left: ξ, the string length per Hubble volume, against
-        log(m<sub>r</sub>/H); after the initial transient (gray) it rises linearly, with slope 0.18 against the published
-        0.22. Bottom right: string length per volume falls more slowly than η<sup>−2</sup>, the signature of that climb.</figcaption>
-    </figure>
-  </section>
-
-  <section id="next">
-    <h2>Coming</h2>
-    <div class="callout prose"><p>Both halves are done: domain walls and vortices, on the lattice and as relativistic
-      fields, through to cosmic strings in 3D. What remains is the <b>defect atlas</b>: one panel per (symmetry, dynamics)
-      pair at matched size, with every model's growth law on one plot.</p></div>
   </section>
 </main>
 
 <footer>
-  <span><a href="../">← Portfolio</a> · <a href="/">Carter Williams</a></span>
+  <span><a href="./">← Defects</a> · <a href="../">Portfolio</a> · <a href="/">Carter Williams</a></span>
 </footer>
 </body>
 </html>

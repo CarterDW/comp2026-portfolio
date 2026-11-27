@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Cosmology · Defects</title>
+  <meta name="description" content="Relativistic domain walls, vortices and global strings in an expanding universe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body class="space">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">Portfolio</a>
+    <ul>
+      <li><a href="#cosmo">Walls</a></li>
+      <li><a href="#vortices-field">Vortices</a></li>
+      <li><a href="#strings">Strings</a></li>
+      <li><a href="index.html">The atlas</a></li>
+      <li><a href="kibble-zurek.html">Kibble–Zurek</a></li>
+      <li><a href="dynamics.html">Coarsening</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+
+  <header class="page-hero">
+    <div class="crumb"><a href="/">Carter Williams</a> / <a href="../">Portfolio</a> / <a href="./">Defects</a> / Cosmology</div>
+    <div class="kicker">Defects · in an expanding universe</div>
+    <h1>Defects in an expanding universe</h1>
+    <p class="lede">
+      In the early universe defects are fields obeying wave equations, and space expands under them. Walls then keep
+      pace with the horizon until they dominate everything, the Zel'dovich problem, while global strings keep about one
+      per horizon, slowly climbing.
+    </p>
+    <div class="links">
+      <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/07_Stat_Mech_and_Ising">Code</a>
+    </div>
+  </header>
+
+  <section id="cosmo">
+    <h2>Walls in an expanding universe</h2>
+    <p class="prose">In the early universe the walls aren't spins on a lattice but a field obeying relativistic wave
+      equations, in a space that is expanding. Solved on an 8192 × 8192 grid, starting from the pattern the Kibble–Zurek
+      step predicts, the network keeps about one wall per horizon: the spacing grows almost in step with the horizon,
+      far faster than the lattice walls' t<sup>1/2</sup>. The measured growth, η<sup>0.87–0.90</sup>, is still a bit
+      short of the textbook η<sup>1</sup>; one run over a factor of three in time can't tell a slow approach to scaling
+      from a real difference. A network that keeps pace with the horizon eventually outweighs everything else: walls
+      with a tension of (1 TeV)³ would dominate the universe a couple of hours after the Big Bang. That is the
+      Zel'dovich problem, and why stable walls must be rare or absent.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step6_walls.png"><img src="img/kz_step6_walls.png" alt="Snapshots of a domain-wall network with the horizon drawn, wall spacing against time compared with the Ising model, and a table of domination times" loading="lazy"></a>
+      <figcaption><b>Relativistic walls.</b> Top: the network at four times, each frame the whole box, with the horizon as
+        a dashed circle. Bottom left: wall spacing against time for radiation and matter eras and flat space (field), and the
+        lattice model's coarsening (black). Bottom right: when walls would come to dominate, for three wall tensions.</figcaption>
+    </figure>
+  </section>
+
+  <section id="vortices-field">
+    <h2>Vortices as a relativistic field</h2>
+    <p class="prose">The same U(1) symmetry, now as a complex field obeying wave equations in an expanding universe.
+      Unlike the lattice vortices, which annihilate as ln(t)/t, the number of vortices per horizon keeps creeping up.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step9_vortices.png"><img src="img/kz_step9_vortices.png" alt="Relativistic vortex field snapshots with the horizon, vortices per horizon area against time compared with the lattice model, and a static vortex's energy" loading="lazy"></a>
+      <figcaption><b>The relativistic vortices.</b> The same symmetry in an expanding universe: vortices per horizon
+        area climb slowly with time (red), unlike the lattice model (black). Right: a single vortex's energy grows as
+        π v² ln R, the logarithm behind both behaviours.</figcaption>
+    </figure>
+  </section>
+
+  <section id="strings">
+    <h2>Cosmic strings in 3D</h2>
+    <p class="prose">In three dimensions the vortices become strings, the global strings of axion cosmology. Simulated on
+      a 512³ grid on the GPU, the network keeps roughly one string per Hubble volume as the universe expands, but the
+      number per horizon creeps upward with the logarithm of time, at 0.18 per unit of the log, close to the 0.22 found
+      in the large published simulations this setup follows. That slow climb matters: extrapolated over the ~70 units of
+      log to the real early universe, it sets how many axions the strings radiate.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step10_strings.png"><img src="img/kz_step10_strings.png" alt="Three-dimensional renders of a global string network at three times with the horizon as a sphere, and the number of strings per horizon against the logarithm of time" loading="lazy"></a>
+      <figcaption><b>A string network growing up.</b> Top: every string in the box at three times, with the horizon as a
+        sphere; the network thins out as the horizon grows. Bottom left: ξ, the string length per Hubble volume, against
+        log(m<sub>r</sub>/H); after the initial transient (gray) it rises linearly, with slope 0.18 against the published
+        0.22. Bottom right: string length per volume falls more slowly than η<sup>−2</sup>, the signature of that climb.</figcaption>
+    </figure>
+  </section>
+
+  <section id="more">
+    <h2>Elsewhere in the project</h2>
+    <div class="buttons-row prose">
+      <p><a href="kibble-zurek.html"><b>Kibble–Zurek</b></a>: How many defects a cooling leaves: walls and vortices.</p>
+      <p><a href="dynamics.html"><b>Coarsening</b></a>: What happens next on the lattice: flips, swaps, annihilating vortices.</p>
+      <p><a href="./"><b>The atlas</b></a>: Every model side by side, and every growth law on one plot.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span><a href="./">← Defects</a> · <a href="../">Portfolio</a> · <a href="/">Carter Williams</a></span>
+</footer>
+</body>
+</html>

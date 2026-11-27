@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Coarsening · Defects</title>
+  <meta name="description" content="What happens to walls and vortices after a quench on the lattice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body class="space">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">Portfolio</a>
+    <ul>
+      <li><a href="#walls">Ising quench</a></li>
+      <li><a href="#coarsening">Flips vs swaps</a></li>
+      <li><a href="#vortex-coarsening">Vortices</a></li>
+      <li><a href="index.html">The atlas</a></li>
+      <li><a href="kibble-zurek.html">Kibble–Zurek</a></li>
+      <li><a href="cosmology.html">Cosmology</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+
+  <header class="page-hero">
+    <div class="crumb"><a href="/">Carter Williams</a> / <a href="../">Portfolio</a> / <a href="./">Defects</a> / Coarsening</div>
+    <div class="kicker">Defects · what happens next</div>
+    <h1>After the quench</h1>
+    <p class="lede">
+      Once defects form they don't stay put: walls straighten and shrink, vortices find partners and annihilate. How fast
+      depends on the dynamics, and the lattice models here show three different laws.
+    </p>
+    <div class="links">
+      <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/07_Stat_Mech_and_Ising">Code</a>
+    </div>
+  </header>
+
+  <section id="walls">
+    <h2>Domain walls: the Ising quench</h2>
+    <p class="prose">The Z₂ story starts with a faster engine: a checkerboard update of the Ising model at 100 million
+      spin flips per second. It reproduces the exact Boltzmann distribution over all 65,536 states of a 4 × 4 lattice and the
+      exact energy of a 64 × 64 lattice. One trap, caught by watching the movie rather than the equilibrium checks: with the
+      usual Metropolis rule, a checkerboard flips every zero-cost spin of a sublattice at once, and the walls shrink
+      too fast (t<sup>−0.8</sup>). The heat-bath rule fixes it and recovers the textbook t<sup>−1/2</sup>.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>A quench to half the critical temperature.</b> A 512 × 512 lattice of random spins
+          (gold up, blue down, walls black) is dropped below T<sub>c</sub> and left alone for 2000 sweeps, with time
+          running logarithmically. Domains form within a few sweeps, then the walls straighten and shrink; whole domains
+          vanish. The wall density falls as t<sup>−1/2</sup>.</figcaption>
+      </div>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_quench.png"><img src="img/kz_quench.png" alt="Four snapshots of Ising domains after a quench and the wall density against time" loading="lazy"></a>
+      <figcaption><b>Coarsening.</b> Four moments of the same quench (a quarter of the lattice), and the excess wall
+        density against time, which follows the Allen–Cahn law t<sup>−1/2</sup> for curvature-driven walls.</figcaption>
+    </figure>
+  </section>
+
+  <section id="coarsening">
+    <h2>After the quench: how walls disappear</h2>
+    <p class="prose">Once the walls exist, they coarsen. Under ordinary spin flips a wall moves to reduce its own curvature,
+      so a single circular domain shrinks at a steady rate in area and vanishes in a time ∝ R², and the typical domain
+      grows as t<sup>1/2</sup>. If the magnetization is conserved, as in an alloy separating, spins can only swap places,
+      walls move only by carrying material along them, and growth slows to t<sup>1/3</sup>. Same start, same temperature,
+      very different histories.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_step4_sidebyside.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>Spin flips (left) vs spin swaps (right).</b> One random start with exactly zero
+          magnetization, quenched to 0.7 T<sub>c</sub>, 256 × 256. With flips the domains merge until one color wins.
+          With swaps the total of each color is fixed, so the pattern can only coarsen slowly into a labyrinth.</figcaption>
+      </div>
+    </figure>
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step4_coarsening.png"><img src="img/kz_step4_coarsening.png" alt="Shrinking droplets, the growth law, dynamic scaling with Porod tail, and the outcomes of zero-temperature quenches" loading="lazy"></a>
+        <figcaption><b>The non-conserved checks.</b> Droplets of three sizes shrink on one curve once time is divided by
+          R² (t<sub>vanish</sub> ∝ R<sup>2.1</sup>). The structure factor collapses with the domain size and falls as
+          (kℓ)<sup>−3</sup>, the signature of sharp walls. Quenched to absolute zero, 37% of systems freeze into straight
+          stripes forever instead of reaching the ground state, close to the known one in three.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step4_kawasaki.png"><img src="img/kz_step4_kawasaki.png" alt="Domain size against time for flips and swaps, and the effective exponent of swaps against inverse domain size" loading="lazy"></a>
+        <figcaption><b>Two growth laws.</b> Left: domain size for flips and swaps. Right: the swap model's growth exponent
+          creeps up slowly, and extrapolated to infinitely large domains it reaches <b>0.318</b>, against the
+          Lifshitz–Slyozov 1/3, the same slow approach Huse found in 1986.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="vortex-coarsening">
+    <h2>Vortices after the quench</h2>
+    <p class="prose">Quench the spins below the transition and the vortices pair up and annihilate. Because the pull
+      between a vortex and an antivortex weakens only logarithmically, and their drag grows with distance, the count
+      falls as ln(t)/t rather than a clean power law, and a single planted pair takes a time ∝ R² ln R to meet. Both
+      show up cleanly.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_step8_movie.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>Vortex annihilation.</b> The spin angle as colour on a 256 × 256 lattice after a
+          quench to T = 0.3, with time running logarithmically to 10,000 sweeps; vortices are white, antivortices black.
+          Pairs find each other and vanish, and the colours spread into large smooth regions.</figcaption>
+      </div>
+    </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step8_xy.png"><img src="img/kz_step8_xy.png" alt="Snapshots of the quenched XY model, vortex density against time with two fits, and pair annihilation time against separation" loading="lazy"></a>
+        <figcaption><b>The lattice vortices.</b> Density against time: ln(t)/t fits (χ²/dof 0.4), 1/t doesn't (61).
+          One planted pair: annihilation time against initial separation follows R² ln R better than R².</figcaption>
+      </figure>
+  </section>
+
+  <section id="more">
+    <h2>Elsewhere in the project</h2>
+    <div class="buttons-row prose">
+      <p><a href="kibble-zurek.html"><b>Kibble–Zurek</b></a>: How many defects a cooling leaves: walls and vortices.</p>
+      <p><a href="cosmology.html"><b>Cosmology</b></a>: Relativistic walls, vortices and strings in an expanding universe.</p>
+      <p><a href="./"><b>The atlas</b></a>: Every model side by side, and every growth law on one plot.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span><a href="./">← Defects</a> · <a href="../">Portfolio</a> · <a href="/">Carter Williams</a></span>
+</footer>
+</body>
+</html>

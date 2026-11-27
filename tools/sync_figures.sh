@@ -42,6 +42,16 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 07_Stat_Mech_and_Ising/checks/plots/kz_step10_strings.png defects/img/kz_step10_strings.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step8_xy.png defects/img/kz_step8_xy.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step9_vortices.png defects/img/kz_step9_vortices.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step11_atlas.png defects/img/kz_step11_atlas.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step11_growth.png defects/img/kz_step11_growth.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/z2_lattice.png defects/img/atlas/z2_lattice.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/z2_kawasaki.png defects/img/atlas/z2_kawasaki.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/z2_flat.png defects/img/atlas/z2_flat.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/z2_expanding.png defects/img/atlas/z2_expanding.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/u1_lattice.png defects/img/atlas/u1_lattice.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/u1_kawasaki.png defects/img/atlas/u1_kawasaki.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/u1_flat.png defects/img/atlas/u1_flat.png
+07_Stat_Mech_and_Ising/checks/plots/atlas_cells/u1_expanding.png defects/img/atlas/u1_expanding.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_coarsening.png defects/img/kz_step4_coarsening.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_kawasaki.png defects/img/kz_step4_kawasaki.png
 10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png

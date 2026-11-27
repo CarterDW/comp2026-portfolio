@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Kibble–Zurek · Defects</title>
+  <meta name="description" content="How many defects a phase transition leaves, for walls and vortices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body class="space">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../">Portfolio</a>
+    <ul>
+      <li><a href="#vortices">KT warm-up</a></li>
+      <li><a href="#ising-kz">Walls</a></li>
+      <li><a href="#vortices-kz">Vortices</a></li>
+      <li><a href="index.html">The atlas</a></li>
+      <li><a href="dynamics.html">Coarsening</a></li>
+      <li><a href="cosmology.html">Cosmology</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+
+  <header class="page-hero">
+    <div class="crumb"><a href="/">Carter Williams</a> / <a href="../">Portfolio</a> / <a href="./">Defects</a> / Kibble–Zurek</div>
+    <div class="kicker">Defects · how many form</div>
+    <h1>Cooling too fast to keep up</h1>
+    <p class="lede">
+      Near a critical point a system relaxes ever more slowly, so any finite cooling rate eventually outruns it and the
+      pattern freezes. Kibble and Zurek predicted how the frozen size depends on the rate. Here it is measured for walls,
+      then for vortices, whose transition adds logarithms.
+    </p>
+    <div class="links">
+      <a class="btn" href="https://github.com/CarterDW/COMP2026/tree/Carter-Williams/agentic/07_Stat_Mech_and_Ising">Code</a>
+    </div>
+  </header>
+
+  <section id="vortices">
+    <h2>Warm-up: vortices and the Kosterlitz–Thouless transition</h2>
+    <p class="prose">Before quenching anything, the engine has to get the equilibrium physics of the 2D XY model right.
+      This model has no ordinary ordered phase. It still has a transition, at T<sub>KT</sub> ≈ 0.893, driven by
+      vortex–antivortex pairs unbinding. This warm-up is finished.</p>
+
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kt_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>A quench to T = 0.5.</b> Color is the spin angle, so each vortex is a point
+          where all the colors meet (black: +1, white: −1). Right after the quench the field is full of vortices. They find
+          partners and annihilate, and the colored domains grow. This is the coarsening that the final arc measures
+          for every model.</figcaption>
+      </div>
+    </figure>
+
+    <figure class="fig">
+      <a class="zoom" href="img/kt_quench.png"><img src="img/kt_quench.png" alt="Snapshots of a quenched XY model showing vortex annihilation" loading="lazy"></a>
+      <figcaption><b>Counting them.</b> 5424 vortices right after the quench, 10 by t = 5000 sweeps. The density
+        falls close to ln t / t, as expected for 2D XY coarsening under dissipative dynamics.</figcaption>
+    </figure>
+
+    <figure class="fig">
+      <a class="zoom" href="img/kt_transition.png"><img src="img/kt_transition.png" alt="Helicity modulus, vortex density and specific heat against temperature" loading="lazy"></a>
+      <figcaption><b>Finding the transition.</b> Left: the stiffness crosses the Nelson–Kosterlitz line 2T/π at 0.938
+        (L = 16) and 0.926 (L = 32), drifting toward 0.893 as L grows, slowly, as expected. Middle: the vortex density is
+        smooth through T<sub>KT</sub>, so counting vortices can't locate the transition. Right: the specific heat peaks
+        about 15% above T<sub>KT</sub>, not at it.</figcaption>
+    </figure>
+
+    <figure class="fig">
+      <a class="zoom" href="img/kt_errors.png"><img src="img/kt_errors.png" alt="Blocking analysis, stiffness against lattice size at T = 1.4, and eight repeat runs" loading="lazy"></a>
+      <figcaption><b>Are the error bars honest?</b> Above T<sub>KT</sub> (here T = 1.4) the stiffness should vanish, but at
+        L = 16 it came out 3.8σ from zero. Left: the blocked error plateaus by 2<sup>8</sup> sweeps (τ<sub>int</sub> ≈ 2
+        sweeps), so the runs are long enough. Middle: the stiffness falls to zero within errors at L = 32 and 64; the
+        L = 16 value is a finite-size effect, not a bug. Right: eight independent L = 16 runs agree (χ² = 5.2 for 7 dof),
+        and their replica-scatter and blocked errors match.</figcaption>
+    </figure>
+
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/kt_correlations.png"><img src="img/kt_correlations.png" alt="Spin correlations and the exponent eta against temperature" loading="lazy"></a>
+        <figcaption><b>The KT exponent.</b> Below T<sub>KT</sub>, correlations fall as power laws, and the exponent η reaches
+          1/4 at the transition, both fitted from G(r) and predicted from the measured stiffness. Above it they are no
+          longer power laws.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kt_vortices.png"><img src="img/kt_vortices.png" alt="Planted vortex pairs, Coulomb-gas energy, and an equilibrium vortex field" loading="lazy"></a>
+        <figcaption><b>Checking the vortex counter.</b> Planted pairs are found exactly. The pair energy follows the
+          Coulomb-gas law 4π ln s, which is the input to the KT argument. Right: an equilibrium field at T = 0.95.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="ising-kz">
+    <h2>How many walls a cooling leaves</h2>
+    <p class="prose">The Kibble–Zurek argument in three measurements: how slowly the system relaxes near
+      T<sub>c</sub> (the exponent z), the size the pattern freezes at for each cooling rate, and what is left after
+      the cooling ends.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step2_z.png"><img src="img/kz_step2_z.png" alt="Autocorrelation time against lattice size, Binder cumulant curves crossing at the critical point, and their scaling collapse" loading="lazy"></a>
+      <figcaption><b>Critical slowing down.</b> Near T<sub>c</sub> the system takes ever longer to forget its state.
+        Left: the autocorrelation time grows as L<sup>z</sup> with <b>z = 2.12 ± 0.03</b>, against the accepted 2.167; above
+        T<sub>c</sub> it doesn't grow at all. Middle: the Binder cumulants of four lattice sizes cross at T<sub>c</sub>, at the
+        universal value 0.611. Right: they fall on one curve when temperature is rescaled by L. This z sets how fast
+        a cooling system can keep up, and so how many walls a quench leaves behind: the Kibble–Zurek exponent is
+        1/(1 + z) = 0.32.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step3.png"><img src="img/kz_step3.png" alt="Ising snapshots at freeze-out for four cooling rates, the correlation length along each ramp, and the Kibble–Zurek collapse" loading="lazy"></a>
+      <figcaption><b>Kibble–Zurek: how many walls a cooling leaves.</b> The lattice is cooled through T<sub>c</sub> at
+        rates spanning a factor of 1000. Close to T<sub>c</sub> it can't keep up, and the domain pattern freezes at a
+        size ξ̂ that grows only as the <b>0.316 ± 0.019 power</b> of the cooling time, exactly the Kibble–Zurek
+        prediction from z. Top: snapshots at the freeze-out time, each window 16 ξ̂ wide; scaled this way, a 30-sweep
+        quench and a 30,000-sweep one look alike. Bottom: the correlation length along every ramp (left) falls onto
+        one curve once length and time are rescaled (right). A cooling law like the early universe's, T ∝ t<sup>−1/2</sup>,
+        gives the same ξ̂ as a straight ramp with the same slope at T<sub>c</sub>: only that slope matters.</figcaption>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step5.png"><img src="img/kz_step5.png" alt="Rescaled wall spacing along slow ramps, the surviving wall density against cooling time, and the ratio of the naive estimate to the survivors" loading="lazy"></a>
+      <figcaption><b>But the walls don't stay frozen.</b> Cool all the way to half of T<sub>c</sub> and count what is left.
+        Left: the wall spacing follows the Kibble–Zurek scaling up to the freeze-out time, then keeps growing as the walls
+        coarsen. Middle: the walls that survive fall as τ<sub>Q</sub><sup>−0.47</sup>, not −0.32. A two-stage model, Kibble–Zurek
+        at freeze-out and then ordinary coarsening, with both amplitudes taken from the steps above, predicts every point
+        to within about 20%. Right: the naive count overestimates the survivors, by 3.6× for the slowest cooling.</figcaption>
+    </figure>
+  </section>
+
+  <section id="vortices-kz">
+    <h2>Vortices: Kibble–Zurek with a logarithm</h2>
+    <p class="prose">The second half of the project repeats the story for vortices, the 2D cousins of cosmic strings.
+      Their transition (Kosterlitz–Thouless) has no ordinary critical exponent: the correlation length diverges
+      exponentially, so the Kibble–Zurek counting picks up logarithms. Cooled through the transition at rates spanning
+      a factor of 300, the vortices left behind fall roughly as τ<sub>Q</sub><sup>−0.7</sup>. But the apparent exponent
+      steepens with slower cooling, 0.70 → 0.79, and for the slower ramps the data follow ln(τ<sub>Q</sub>)/τ<sub>Q</sub>
+      better than any power law, as Jelić &amp; Cugliandolo predicted. A pure log form doesn't fit the fastest
+      ramps, though, which need an extra term.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step7_xy.png"><img src="img/kz_step7_xy.png" alt="Remnant vortex density against cooling time with power-law and logarithmic fits, residuals, and phase snapshots with vortices" loading="lazy"></a>
+      <figcaption><b>The vortices left behind.</b> Top left: remnant vortex density at the end of the ramp, with one power
+        law (blue) and the logarithmic form (red; dotted: fitted to the slower ramps only); inset: the power-law exponent
+        fitted over one decade at a time, which drifts. Top right: residuals. Bottom: the spin angle as colour at the
+        moment of crossing T<sub>KT</sub> for three cooling times, with vortices (white) and antivortices (black).</figcaption>
+    </figure>
+  </section>
+
+  <section id="more">
+    <h2>Elsewhere in the project</h2>
+    <div class="buttons-row prose">
+      <p><a href="dynamics.html"><b>Coarsening</b></a>: What happens next on the lattice: flips, swaps, annihilating vortices.</p>
+      <p><a href="cosmology.html"><b>Cosmology</b></a>: Relativistic walls, vortices and strings in an expanding universe.</p>
+      <p><a href="./"><b>The atlas</b></a>: Every model side by side, and every growth law on one plot.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span><a href="./">← Defects</a> · <a href="../">Portfolio</a> · <a href="/">Carter Williams</a></span>
+</footer>
+</body>
+</html>
