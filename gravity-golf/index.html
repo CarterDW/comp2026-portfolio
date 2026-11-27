@@ -24,6 +24,7 @@
       <li><a href="#baseline">Baseline</a></li>
       <li><a href="#policy">The policy</a></li>
       <li><a href="#planets">More planets</a></li>
+      <li><a href="#stars">Stars</a></li>
       <li><a href="#gradients">Gradients</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
@@ -149,6 +150,20 @@
       <a class="zoom" href="img/step4_success_vs_N.png"><img src="img/step4_success_vs_N.png" alt="Success against the number of planets for the slot network and the Deep Sets network, and training curves with curriculum steps" loading="lazy"></a>
       <figcaption><b>One shot against the number of planets</b> (left; gray: slot network, blue: Deep Sets; dashed: short
         flights, solid: the full long-flight game), and training (right): each vertical line is the curriculum adding a planet.</figcaption>
+    </figure>
+  </section>
+
+  <section id="stars">
+    <h2>The triple-star challenge</h2>
+    <p class="prose">A harder course: three massive stars and a blocker, with bonus points for brushing past each star on
+      the way into the hole. Given 3000 tries, an optimizer finds spectacular looping tours of all three stars on a third
+      of the long-flight courses. The trained network sinks 85% of them in a single shot, and it never touches a star.
+      The tours are thin loops, and a policy that explores only a little around its aim almost never stumbles into one, so
+      it settles for the safe sink. Reward a skill the agent can't find by accident, and it doesn't learn it.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/step4b_gallery_tier2.png"><img src="img/step4b_gallery_tier2.png" alt="Rendered three-star tours found by an optimizer, above the trained policy's straight shots on the same kind of course" loading="lazy"></a>
+      <figcaption><b>Top:</b> three-star tours found by CMA-ES with 3000 tries (dashed rings: stars touched). <b>Bottom:</b> the
+        trained policy's best single shots, straight into the hole.</figcaption>
     </figure>
   </section>
 
