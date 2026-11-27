@@ -25,6 +25,7 @@
       <li><a href="#coarsening">Coarsening</a></li>
       <li><a href="#cosmo">Expanding universe</a></li>
       <li><a href="#vortices-kz">Vortex KZ</a></li>
+      <li><a href="#vortex-coarsening">Vortex annihilation</a></li>
       <li><a href="#strings">Strings</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
@@ -233,6 +234,36 @@
     </figure>
   </section>
 
+  <section id="vortex-coarsening">
+    <h2>Vortices after the quench</h2>
+    <p class="prose">Quench the spins below the transition and the vortices pair up and annihilate. Because the pull
+      between a vortex and an antivortex weakens only logarithmically, and their drag grows with distance, the count
+      falls as ln(t)/t rather than a clean power law, and a single planted pair takes a time ∝ R² ln R to meet. Both
+      show up cleanly. In a relativistic field the same vortices behave differently: the number per horizon keeps
+      creeping up instead of settling.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_step8_movie.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>Vortex annihilation.</b> The spin angle as colour on a 256 × 256 lattice after a
+          quench to T = 0.3, with time running logarithmically to 10,000 sweeps; vortices are white, antivortices black.
+          Pairs find each other and vanish, and the colours spread into large smooth regions.</figcaption>
+      </div>
+    </figure>
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step8_xy.png"><img src="img/kz_step8_xy.png" alt="Snapshots of the quenched XY model, vortex density against time with two fits, and pair annihilation time against separation" loading="lazy"></a>
+        <figcaption><b>The lattice vortices.</b> Density against time: ln(t)/t fits (χ²/dof 0.4), 1/t doesn't (61).
+          One planted pair: annihilation time against initial separation follows R² ln R better than R².</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step9_vortices.png"><img src="img/kz_step9_vortices.png" alt="Relativistic vortex field snapshots with the horizon, vortices per horizon area against time compared with the lattice model, and a static vortex's energy" loading="lazy"></a>
+        <figcaption><b>The relativistic vortices.</b> The same symmetry in an expanding universe: vortices per horizon
+          area climb slowly with time (red), unlike the lattice model (black). Right: a single vortex's energy grows as
+          π v² ln R, the logarithm behind both behaviours.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section id="strings">
     <h2>Cosmic strings in 3D</h2>
     <p class="prose">In three dimensions the vortices become strings, the global strings of axion cosmology. Simulated on
@@ -251,9 +282,9 @@
 
   <section id="next">
     <h2>Coming</h2>
-    <div class="callout prose"><p>The domain-wall (Z₂) story is complete, and the vortex half has begun. Next: vortex
-      annihilation after a quench, relativistic vortices, and global strings in 3D. Then the <b>defect atlas</b>: one
-      panel per (symmetry, dynamics) pair, with every model's growth law on one plot.</p></div>
+    <div class="callout prose"><p>Both halves are done: domain walls and vortices, on the lattice and as relativistic
+      fields, through to cosmic strings in 3D. What remains is the <b>defect atlas</b>: one panel per (symmetry, dynamics)
+      pair at matched size, with every model's growth law on one plot.</p></div>
   </section>
 </main>
 

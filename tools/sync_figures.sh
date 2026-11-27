@@ -40,6 +40,8 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 07_Stat_Mech_and_Ising/checks/plots/kz_step6_walls.png defects/img/kz_step6_walls.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step7_xy.png defects/img/kz_step7_xy.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step10_strings.png defects/img/kz_step10_strings.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step8_xy.png defects/img/kz_step8_xy.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step9_vortices.png defects/img/kz_step9_vortices.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_coarsening.png defects/img/kz_step4_coarsening.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_kawasaki.png defects/img/kz_step4_kawasaki.png
 10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png
@@ -68,6 +70,8 @@ FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; p
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 32 "$DST/defects/img/kt_quench.mp4"
 "$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kz_quench.gif" \
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 30 "$DST/defects/img/kz_quench.mp4"
+"$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kz_step8_movie.gif" \
+  -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 30 "$DST/defects/img/kz_step8_movie.mp4"
 "$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kz_step4_sidebyside.gif" \
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 30 "$DST/defects/img/kz_step4_sidebyside.mp4"
 
