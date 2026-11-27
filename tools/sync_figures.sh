@@ -36,6 +36,8 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 07_Stat_Mech_and_Ising/checks/plots/kz_quench.png defects/img/kz_quench.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step2_z.png defects/img/kz_step2_z.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step3_kz.png defects/img/kz_step3.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step4_coarsening.png defects/img/kz_step4_coarsening.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step4_kawasaki.png defects/img/kz_step4_kawasaki.png
 10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png
 10_Convolutions_and_Galaxies/results/step3_psffix.png sky-classifier/img/step3_psffix.png
 10_Convolutions_and_Galaxies/results/step4_offdiagonal.png sky-classifier/img/step4_offdiagonal.png
@@ -57,6 +59,8 @@ FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; p
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 32 "$DST/defects/img/kt_quench.mp4"
 "$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kz_quench.gif" \
   -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 30 "$DST/defects/img/kz_quench.mp4"
+"$FF" -loglevel error -y -i "$SRC/07_Stat_Mech_and_Ising/checks/plots/kz_step4_sidebyside.gif" \
+  -movflags +faststart -pix_fmt yuv420p -c:v libx264 -preset slow -crf 30 "$DST/defects/img/kz_step4_sidebyside.mp4"
 
 # Solar movies: GIF -> MP4 (+ first-frame poster). crf chosen per movie; the particle-heavy collapse needs 33.
 for spec in "rung4_protostar_disk/plots/collapse_to_disk 33" "rung4b_ignition/plots/stellar_ignition 26" "rung5_planet_formation/plots/formation/formation 26"; do

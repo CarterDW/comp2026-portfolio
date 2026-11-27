@@ -22,6 +22,7 @@
       <li><a href="#knobs">The knobs</a></li>
       <li><a href="#vortices">Vortices</a></li>
       <li><a href="#walls">Walls</a></li>
+      <li><a href="#coarsening">Coarsening</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
   </div>
@@ -151,6 +152,38 @@
         one curve once length and time are rescaled (right). A cooling law like the early universe's, T ∝ t<sup>−1/2</sup>,
         gives the same ξ̂ as a straight ramp with the same slope at T<sub>c</sub>: only that slope matters.</figcaption>
     </figure>
+  </section>
+
+  <section id="coarsening">
+    <h2>After the quench: how walls disappear</h2>
+    <p class="prose">Once the walls exist, they coarsen. Under ordinary spin flips a wall moves to reduce its own curvature,
+      so a single circular domain shrinks at a steady rate in area and vanishes in a time ∝ R², and the typical domain
+      grows as t<sup>1/2</sup>. If the magnetization is conserved, as in an alloy separating, spins can only swap places,
+      walls move only by carrying material along them, and growth slows to t<sup>1/3</sup>. Same start, same temperature,
+      very different histories.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_step4_sidebyside.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>Spin flips (left) vs spin swaps (right).</b> One random start with exactly zero
+          magnetization, quenched to 0.7 T<sub>c</sub>, 256 × 256. With flips the domains merge until one color wins.
+          With swaps the total of each color is fixed, so the pattern can only coarsen slowly into a labyrinth.</figcaption>
+      </div>
+    </figure>
+    <div class="two">
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step4_coarsening.png"><img src="img/kz_step4_coarsening.png" alt="Shrinking droplets, the growth law, dynamic scaling with Porod tail, and the outcomes of zero-temperature quenches" loading="lazy"></a>
+        <figcaption><b>The non-conserved checks.</b> Droplets of three sizes shrink on one curve once time is divided by
+          R² (t<sub>vanish</sub> ∝ R<sup>2.1</sup>). The structure factor collapses with the domain size and falls as
+          (kℓ)<sup>−3</sup>, the signature of sharp walls. Quenched to absolute zero, 37% of systems freeze into straight
+          stripes forever instead of reaching the ground state, close to the known one in three.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/kz_step4_kawasaki.png"><img src="img/kz_step4_kawasaki.png" alt="Domain size against time for flips and swaps, and the effective exponent of swaps against inverse domain size" loading="lazy"></a>
+        <figcaption><b>Two growth laws.</b> Left: domain size for flips and swaps. Right: the swap model's growth exponent
+          creeps up slowly, and extrapolated to infinitely large domains it reaches <b>0.318</b>, against the
+          Lifshitz–Slyozov 1/3, the same slow approach Huse found in 1986.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section id="next">
