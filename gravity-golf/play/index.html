@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Play Gravity Golf</title>
+  <meta name="description" content="One launch, a few planets, and a hole. Play the gravity golf courses the agent learned on, and watch its shot.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../../assets/portfolio.css">
+  <style>
+    .play { display: grid; grid-template-columns: minmax(0, 720px) minmax(240px, 1fr); gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .play { grid-template-columns: 1fr; } }
+    #court { display: block; width: 100%; border-radius: var(--radius, 10px); touch-action: none; cursor: crosshair;
+             background: #03040b; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+    .panel { display: flex; flex-direction: column; gap: 14px; font-size: 15px; }
+    .panel h2 { margin: 0; font-size: 1.25rem; }
+    .panel p { margin: 0; color: var(--muted); }
+    .row { display: grid; grid-template-columns: 64px 1fr 64px; gap: 10px; align-items: center; }
+    .row output { font-variant-numeric: tabular-nums; text-align: right; }
+    .row input[type=range] { width: 100%; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .buttons button, .pick { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--text);
+                             border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+    .buttons button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .buttons button:hover, .pick:hover { border-color: var(--accent); }
+    #message { min-height: 3em; color: var(--text); }
+    #best, #totals { font-size: 14px; color: var(--muted); }
+    #picker { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+    .pick { padding: 4px 0; font-size: 13px; }
+    .pick.done { background: #e9f6ee; border-color: #8fcfaa; }
+    .pick.star { box-shadow: inset 0 -3px 0 #f0c64a; }
+    .pick.on { outline: 2px solid var(--accent); }
+    :root[data-theme="dark"] .pick.done { background: #173126; border-color: #2f5e45; }
+    .legend { font-size: 13px; color: var(--muted); }
+    .legend span { display: inline-block; width: 10px; height: 3px; margin: 0 4px 3px 10px; vertical-align: middle; }
+    kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; }
+  </style>
+</head>
+<body class="space">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../">Portfolio</a>
+    <ul>
+      <li><a href="../">How it works</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+  <header class="page-hero">
+    <div class="crumb"><a href="/">Carter Williams</a> / <a href="../../">Portfolio</a> / <a href="../">Gravity golf</a> / Play</div>
+    <h1>Play gravity golf</h1>
+    <p class="lede">One launch per attempt: an angle and a speed, then gravity takes over. Planets bend the ball's path,
+      and touching one is a crash. These are the held-out courses the network was tested on. On half of the planet holes
+      it sinks the ball in one shot, and on the other half it misses. Can you do better? You can also watch its shot,
+      and the shot an optimizer found after many tries.</p>
+  </header>
+
+  <div class="play">
+    <div><canvas id="court" width="720" height="720" aria-label="Gravity golf course"></canvas>
+      <p class="legend">Trails: <span style="background:#ffd27f"></span>you <span style="background:#6fe0ff"></span>the network
+        <span style="background:#ff8fd0"></span>the optimizer · faint lines: your earlier attempts (gold sunk, orange crash,
+        blue out of bounds)</p>
+    </div>
+    <div class="panel">
+      <div>
+        <h2 id="hole-title">Hole</h2>
+        <p id="hole-desc"></p>
+      </div>
+      <div class="row"><label for="angle">Angle</label>
+        <input id="angle" type="range" min="-180" max="180" step="0.01"><output id="angle-out"></output></div>
+      <div class="row"><label for="speed">Speed</label>
+        <input id="speed" type="range" min="0" max="1000" step="1"><output id="speed-out"></output></div>
+      <div class="buttons">
+        <button id="launch" class="primary">Launch</button>
+        <button id="show-ai">Watch the network</button>
+        <button id="show-opt">Watch the optimizer</button>
+      </div>
+      <div id="message" aria-live="polite"></div>
+      <div id="best"></div>
+      <div class="buttons">
+        <button id="prev">← Previous hole</button>
+        <button id="next">Next hole →</button>
+        <button id="clear">Clear trails</button>
+        <label style="align-self:center"><input id="fast" type="checkbox"> Fast (<kbd>F</kbd>)</label>
+      </div>
+      <div id="picker" aria-label="Holes"></div>
+      <div id="totals"></div>
+      <p class="legend">Keys: <kbd>←</kbd><kbd>→</kbd> angle, <kbd>↑</kbd><kbd>↓</kbd> speed (hold <kbd>Shift</kbd> for bigger
+        steps), <kbd>Space</kbd> launch. Holes 33–40 (gold underline) are the triple-star challenge.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span><a href="../">← Gravity golf</a> · <a href="/">Carter Williams</a></span>
+</footer>
+<script src="physics.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
