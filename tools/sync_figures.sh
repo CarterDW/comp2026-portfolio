@@ -37,6 +37,7 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 07_Stat_Mech_and_Ising/checks/plots/kz_step2_z.png defects/img/kz_step2_z.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step3_kz.png defects/img/kz_step3.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step5_slow.png defects/img/kz_step5.png
+07_Stat_Mech_and_Ising/checks/plots/kz_step6_walls.png defects/img/kz_step6_walls.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_coarsening.png defects/img/kz_step4_coarsening.png
 07_Stat_Mech_and_Ising/checks/plots/kz_step4_kawasaki.png defects/img/kz_step4_kawasaki.png
 10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png
