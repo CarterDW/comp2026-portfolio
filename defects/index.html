@@ -21,6 +21,7 @@
     <ul>
       <li><a href="#knobs">The knobs</a></li>
       <li><a href="#vortices">Vortices</a></li>
+      <li><a href="#walls">Walls</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
   </div>
@@ -108,6 +109,29 @@
           Coulomb-gas law 4π ln s, which is the input to the KT argument. Right: an equilibrium field at T = 0.95.</figcaption>
       </figure>
     </div>
+  </section>
+
+  <section id="walls">
+    <h2>Domain walls: the Ising quench</h2>
+    <p class="prose">The Z₂ story starts with a faster engine: a checkerboard update of the Ising model at 100 million
+      spin flips per second. It reproduces the exact Boltzmann distribution over all 65,536 states of a 4 × 4 lattice and the
+      exact energy of a 64 × 64 lattice. One trap, caught by watching the movie rather than the equilibrium checks: with the
+      usual Metropolis rule, a checkerboard flips every zero-cost spin of a sublattice at once, and the walls shrink
+      too fast (t<sup>−0.8</sup>). The heat-bath rule fixes it and recovers the textbook t<sup>−1/2</sup>.</p>
+    <figure class="fig">
+      <div class="two" style="align-items:center">
+        <video src="img/kz_quench.mp4" autoplay loop muted playsinline style="width:100%;border:1px solid var(--line);border-radius:var(--radius);background:#fff"></video>
+        <figcaption style="margin:0"><b>A quench to half the critical temperature.</b> A 512 × 512 lattice of random spins
+          (gold up, blue down, walls black) is dropped below T<sub>c</sub> and left alone for 2000 sweeps, with time
+          running logarithmically. Domains form within a few sweeps, then the walls straighten and shrink; whole domains
+          vanish. The wall density falls as t<sup>−1/2</sup>.</figcaption>
+      </div>
+    </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_quench.png"><img src="img/kz_quench.png" alt="Four snapshots of Ising domains after a quench and the wall density against time" loading="lazy"></a>
+      <figcaption><b>Coarsening.</b> Four moments of the same quench (a quarter of the lattice), and the excess wall
+        density against time, which follows the Allen–Cahn law t<sup>−1/2</sup> for curvature-driven walls.</figcaption>
+    </figure>
   </section>
 
   <section id="next">
