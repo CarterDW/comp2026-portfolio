@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- LAUNCH: delete this line on every page to let search engines list the site -->
+  <meta name="robots" content="noindex">
+  <title>Field Browser</title>
+  <meta name="description" content="Browse 300 real SDSS fields and see what a classifier trained on simulations calls every source.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="../../assets/portfolio.css">
+  <style>
+    .play { display: grid; grid-template-columns: minmax(0, 720px) minmax(260px, 1fr); gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .play { grid-template-columns: 1fr; } }
+    #field { display: block; width: 100%; border-radius: var(--radius, 10px); cursor: crosshair; background: #000; }
+    .panel { display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
+    .panel h2 { margin: 0; font-size: 1.2rem; }
+    .panel p { margin: 0; color: var(--muted); }
+    .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .buttons button, .pick { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--text);
+                             border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+    .buttons button:hover, .pick:hover { border-color: var(--accent); }
+    #strange { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+    .pick { padding: 3px 0; font-size: 12px; }
+    #source { display: grid; grid-template-columns: 160px 1fr; gap: 12px; align-items: start; }
+    #stamp { width: 160px; height: 160px; image-rendering: pixelated; border-radius: 6px; background: #000; }
+    .bar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; margin: 2px 0 6px; }
+    .bar > div { height: 100%; }
+    table.sc { border-collapse: collapse; font-size: 13px; width: 100%; }
+    table.sc td { padding: 2px 6px 2px 0; }
+    .flag { color: #ff5d7a; }
+    .legend { font-size: 13px; color: var(--muted); }
+    .legend span { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; margin: 0 4px -2px 8px; }
+    #call { font-weight: 600; }
+    #sdss, #note { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body class="space">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../">Portfolio</a>
+    <ul>
+      <li><a href="../">Sky classifier</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wide">
+  <header class="page-hero">
+    <div class="crumb"><a href="/">Carter Williams</a> / <a href="../../">Portfolio</a> / <a href="../">Sky classifier</a> / Field browser</div>
+    <h1>Browse the real sky</h1>
+    <p class="lede">300 real SDSS fields, with every source the detector found (1859 in all). The classifier was trained
+      only on simulated images, and it must call everything either a star or a galaxy. Click a source to see the patch
+      of sky it saw, what it called it, and how unfamiliar the source looked to it compared with its training data.</p>
+  </header>
+
+  <div class="play">
+    <div>
+      <canvas id="field" width="720" height="720" aria-label="SDSS field with detected sources"></canvas>
+      <p class="legend"><span style="border-color:#6fe0ff"></span>called star <span style="border-color:#ffb347"></span>called galaxy
+        <span style="border-color:#ff5d7a;border-style:dashed"></span>flagged as unfamiliar (Mahalanobis) · faint circles: a
+        brighter object sits elsewhere in the source's window · dashed box: sources are only classified inside it, where their
+        120-pixel window fits. JPEG pixels are stretched, not linear; 1 pixel = 0.2″ (the window is 24″ across).</p>
+    </div>
+    <div class="panel">
+      <div>
+        <h2 id="field-title">Field</h2>
+        <p id="field-meta"></p>
+      </div>
+      <div class="buttons">
+        <button id="prev">← Previous</button><button id="next">Next →</button><button id="random">Random field</button>
+      </div>
+      <div id="source" hidden>
+        <canvas id="stamp" width="240" height="240" aria-label="The source's 120-pixel window"></canvas>
+        <div>
+          <div id="call"></div>
+          <div style="font-size:13px">P(star) <b id="p-star"></b></div>
+          <div class="bar"><div id="bar-star" style="background:#6fe0ff"></div></div>
+          <div style="font-size:13px">P(galaxy) <b id="p-gal"></b></div>
+          <div class="bar"><div id="bar-gal" style="background:#ffb347"></div></div>
+        </div>
+        <div style="grid-column: 1 / -1">
+          <table class="sc"><thead><tr><td><b>Unfamiliarity score</b></td><td>value</td><td>percentile</td><td></td></tr></thead>
+            <tbody id="scores"></tbody></table>
+          <p style="font-size:12px;margin-top:4px">"Unfamiliar" means above the threshold that flags only 5% of simulated objects
+            the network knows.</p>
+          <div id="sdss"></div>
+          <div id="note"></div>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size:1rem">The 40 strangest sources</h2>
+        <p style="font-size:13px">Ranked by the Mahalanobis score among sources that dominate their own window.</p>
+        <div id="strange" style="margin-top:6px"></div>
+      </div>
+      <p class="legend">Network: the final classifier (catA), averaged over 10 seeds. <a href="../#anomalies">What the strangest
+        sources turned out to be</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span><a href="../">← Sky classifier</a> · <a href="/">Carter Williams</a></span>
+</footer>
+<script src="browser.js"></script>
+</body>
+</html>

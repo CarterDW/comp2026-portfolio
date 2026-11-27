@@ -72,7 +72,12 @@ Gravity_Golf/results/step4b_gallery_tier2.png gravity-golf/img/step4b_gallery_ti
 Gravity_Golf/results/play/courses.json gravity-golf/play/courses.json
 Gravity_Golf/results/step6_headline.png gravity-golf/img/step6_headline.png
 Gravity_Golf/results/step6_shot.mp4 gravity-golf/img/step6_shot.mp4
+10_Convolutions_and_Galaxies/results/browser/fields.json sky-classifier/fields/fields.json
 LIST
+
+# Field browser: the 300 SDSS field JPEGs it shows (from the course data folder, outside agentic/)
+mkdir -p "$DST/sky-classifier/fields/img"
+cp "$SRC/../notebooks/data/sdss_week10/fields/"field_*.jpg "$DST/sky-classifier/fields/img/"
 
 # GIF -> MP4 for movies too big to ship as GIFs (ffmpeg from imageio-ffmpeg in HaloPipeline)
 FF=$("$HOME/anaconda3/envs/HaloPipeline/bin/python" -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())")
