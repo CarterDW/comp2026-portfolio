@@ -32,6 +32,7 @@ $S/rung6_terrestrial/plots/terrestrial_systems_pl200.png solar-system/img/system
 10_Convolutions_and_Galaxies/results/step7a_fields.png sky-classifier/img/step7a_fields.png
 07_Stat_Mech_and_Ising/checks/plots/kt_step3_transition.png defects/img/kt_transition.png
 07_Stat_Mech_and_Ising/checks/plots/kt_correlations.png defects/img/kt_correlations.png
+07_Stat_Mech_and_Ising/checks/plots/defects_step0_errors.png defects/img/kt_errors.png
 10_Convolutions_and_Galaxies/results/step2b_optics.png sky-classifier/img/step2b_optics.png
 10_Convolutions_and_Galaxies/results/step3_psffix.png sky-classifier/img/step3_psffix.png
 10_Convolutions_and_Galaxies/results/step4_offdiagonal.png sky-classifier/img/step4_offdiagonal.png
