@@ -23,6 +23,7 @@
       <li><a href="#chaos">Chaos</a></li>
       <li><a href="#baseline">Baseline</a></li>
       <li><a href="#policy">The policy</a></li>
+      <li><a href="#gradients">Gradients</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
   </div>
@@ -134,11 +135,26 @@
     </figure>
   </section>
 
+  <section id="gradients">
+    <h2>Why not just differentiate the physics?</h2>
+    <p class="prose">The simulator is ordinary array code, so the exact derivative of "how close did the ball come to the hole"
+      with respect to the launch is available, and a network can be trained on it directly instead of by trial and error.
+      It works poorly: <b>35% of unseen 1–2 planet courses, against 85–94% for policy gradient</b> in the same training time.
+      The gradients aren't noisy: independent batches agree almost perfectly. They're <i>locally</i> right and globally
+      wrong. A shot that bends round the wrong side of a planet sits in a local minimum of the closest-approach distance, and
+      following the gradient on that shot alone escapes only half the time. Policy gradient tries nearby shots at random and
+      hops over those barriers. On the long, chaotic flights the gradients do blow up, but only for a minority of shots,
+      and neither method's shots ever fly that long.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/step3b_learning.png"><img src="img/step3b_learning.png" alt="Success rate against training updates and time for physics-gradient training and policy gradient" loading="lazy"></a>
+      <figcaption><b>Physics gradients (orange) vs policy gradient (gray).</b> Unseen 1–2 planet courses sunk by one shot, against
+        training updates (left), wall-clock time (middle), and in the long-flight game (right).</figcaption>
+    </figure>
+  </section>
+
   <section id="next">
     <h2>Coming</h2>
     <ul class="todo-list prose">
-      <li><span class="chip next">physics gradients</span><div>Train by backpropagating through the integrator itself, against
-        policy gradient.</div></li>
       <li><span class="chip next">more planets</span><div>A permutation-invariant network and a curriculum, so the policy
         handles more planets than it trained on.</div></li>
       <li><span class="chip next">steering</span><div>A small fuel budget for thrust in flight, and the headline figure: success
