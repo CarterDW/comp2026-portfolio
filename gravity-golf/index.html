@@ -23,6 +23,7 @@
       <li><a href="#chaos">Chaos</a></li>
       <li><a href="#baseline">Baseline</a></li>
       <li><a href="#policy">The policy</a></li>
+      <li><a href="#planets">More planets</a></li>
       <li><a href="#gradients">Gradients</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
@@ -57,7 +58,7 @@
       <div class="stat"><div class="v">0.8%</div><div class="l">of random shots sink</div></div>
       <div class="stat"><div class="v">~100</div><div class="l">shots CMA-ES needs to sink 83% of courses</div></div>
       <div class="stat"><div class="v">98%</div><div class="l">of unseen 1–2 planet courses sunk by the policy in one shot</div></div>
-      <div class="stat"><div class="v">4–13%</div><div class="l">on 3–4 planet courses it never trained on</div></div>
+      <div class="stat"><div class="v">81%</div><div class="l">on 3–4 planet courses, with a network that takes any number of planets</div></div>
     </div>
   </section>
 
@@ -135,6 +136,22 @@
     </figure>
   </section>
 
+  <section id="planets">
+    <h2>More planets: a network that doesn't care about order</h2>
+    <p class="prose">The first network reads planets from four fixed slots, so it never learned to use the third and fourth.
+      A Deep Sets network instead processes every planet with the same small network and adds the results, so it takes
+      any number of planets in any order, and a massless planet contributes exactly nothing. It trains with a curriculum,
+      adding a planet each time it masters the current number. On held-out courses it sinks <b>81% of 3- and 4-planet
+      courses in one shot</b>, against 4–13% before, for a few points lost on two planets. Courses with 5–6 planets, built
+      differently from anything it saw, are still out of reach. Its shot also makes an excellent starting guess: an
+      optimizer started there sinks 99.5% of courses within 30 tries, where a cold start needs 1000.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/step4_success_vs_N.png"><img src="img/step4_success_vs_N.png" alt="Success against the number of planets for the slot network and the Deep Sets network, and training curves with curriculum steps" loading="lazy"></a>
+      <figcaption><b>One shot against the number of planets</b> (left; gray: slot network, blue: Deep Sets; dashed: short
+        flights, solid: the full long-flight game), and training (right): each vertical line is the curriculum adding a planet.</figcaption>
+    </figure>
+  </section>
+
   <section id="gradients">
     <h2>Why not just differentiate the physics?</h2>
     <p class="prose">The simulator is ordinary array code, so the exact derivative of "how close did the ball come to the hole"
@@ -155,8 +172,6 @@
   <section id="next">
     <h2>Coming</h2>
     <ul class="todo-list prose">
-      <li><span class="chip next">more planets</span><div>A permutation-invariant network and a curriculum, so the policy
-        handles more planets than it trained on.</div></li>
       <li><span class="chip next">steering</span><div>A small fuel budget for thrust in flight, and the headline figure: success
         rate against simulations per course for every method.</div></li>
     </ul>
