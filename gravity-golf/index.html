@@ -19,6 +19,7 @@
   <div class="nav-inner">
     <a class="brand" href="../">Portfolio</a>
     <ul>
+      <li><a href="#answer">The answer</a></li>
       <li><a href="#landscape">Landscape</a></li>
       <li><a href="#chaos">Chaos</a></li>
       <li><a href="#baseline">Baseline</a></li>
@@ -26,7 +27,7 @@
       <li><a href="#planets">More planets</a></li>
       <li><a href="#stars">Stars</a></li>
       <li><a href="#gradients">Gradients</a></li>
-      <li><a href="#next">Coming</a></li>
+      <li><a href="play/">Play</a></li>
     </ul>
   </div>
 </nav>
@@ -65,6 +66,27 @@
   </section>
 
   <!-- ===================== LANDSCAPE ===================== -->
+  <section id="answer">
+    <h2>The answer</h2>
+    <p class="prose">On held-out courses with 2–4 planets, the trained network sinks <b>83% with a single shot</b>.
+      An optimizer searching each course from scratch needs about <b>100 simulated shots</b> to do as well, so one look
+      at the course by the network is worth about a hundred shots of search. Used as a starting guess, it gets better
+      still: an optimizer started from the network's shot sinks 99.7% within 30 tries. Its shots also sit in wider,
+      more forgiving basins than the optimizer's, and it never relies on long, chaotic flights.</p>
+    <div class="two" style="align-items:center">
+      <figure class="fig">
+        <a class="zoom" href="img/step6_headline.png"><img src="img/step6_headline.png" alt="Fraction of courses sunk against simulated shots per course for random shots, CMA-ES, an exhaustive grid and the trained policies" loading="lazy"></a>
+        <figcaption><b>Success against shots per course.</b> Blue: CMA-ES searching each course from scratch; gray: random
+          shots; orange star: the network's one shot; diamonds: the network's shot refined by 30 or 100 more.</figcaption>
+      </figure>
+      <figure class="fig">
+        <video src="img/step6_shot.mp4" autoplay loop muted playsinline style="width:100%;border-radius:var(--radius)"></video>
+        <figcaption><b>One shot vs 319 tries.</b> A held-out 4-planet course: the network's single shot (left), and the
+          shot an optimizer found after 319 simulations (right), on the same clock.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section id="landscape">
     <h2>The landscape of one course</h2>
     <figure class="fig">
@@ -186,11 +208,9 @@
   </section>
 
   <section id="next">
-    <h2>Coming</h2>
-    <ul class="todo-list prose">
-      <li><span class="chip next">headline</span><div>One figure with every method: success rate against simulations per
-        course.</div></li>
-    </ul>
+    <h2>Play it</h2>
+    <div class="callout prose"><p>The project is finished. The best way to see what the network learned is to try the
+      courses yourself: <a href="play/"><b>play gravity golf</b></a>, and watch the network's shot when you're stuck.</p></div>
   </section>
 </main>
 

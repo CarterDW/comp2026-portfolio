@@ -56,6 +56,8 @@ Gravity_Golf/results/step3b_learning.png gravity-golf/img/step3b_learning.png
 Gravity_Golf/results/step4_success_vs_N.png gravity-golf/img/step4_success_vs_N.png
 Gravity_Golf/results/step4b_gallery_tier2.png gravity-golf/img/step4b_gallery_tier2.png
 Gravity_Golf/results/play/courses.json gravity-golf/play/courses.json
+Gravity_Golf/results/step6_headline.png gravity-golf/img/step6_headline.png
+Gravity_Golf/results/step6_shot.mp4 gravity-golf/img/step6_shot.mp4
 LIST
 
 # GIF -> MP4 for movies too big to ship as GIFs (ffmpeg from imageio-ffmpeg in HaloPipeline)
