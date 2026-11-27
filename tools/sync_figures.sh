@@ -73,6 +73,7 @@ Gravity_Golf/results/play/courses.json gravity-golf/play/courses.json
 Gravity_Golf/results/step6_headline.png gravity-golf/img/step6_headline.png
 Gravity_Golf/results/step6_shot.mp4 gravity-golf/img/step6_shot.mp4
 10_Convolutions_and_Galaxies/results/browser/fields.json sky-classifier/fields/fields.json
+10_Convolutions_and_Galaxies/results/finalarc_step2_clouds.png sky-classifier/img/fa2_clouds.png
 10_Convolutions_and_Galaxies/results/ledger/ledger.json sky-classifier/ledger/ledger.json
 10_Convolutions_and_Galaxies/results/ledger/real.png sky-classifier/ledger/real.png
 10_Convolutions_and_Galaxies/results/ledger/rung_0.png sky-classifier/ledger/rung_0.png

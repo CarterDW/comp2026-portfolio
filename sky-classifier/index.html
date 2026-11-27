@@ -141,6 +141,14 @@
         evidence sits on the core and the PSF wings, not the background. The faint real star at the top right is called
         a star with less confidence (P = 0.76): its occlusion map shows galaxy evidence in the wings.</figcaption>
     </figure>
+    <figure class="fig">
+      <a class="zoom" href="img/fa2_clouds.png"><img src="img/fa2_clouds.png" alt="Real and simulated stars in the network's feature space, one panel per ladder rung" loading="lazy"></a>
+      <figcaption><b>Where real and simulated stars sit in the network's own features,</b> one panel per rung (black: real
+        stars, blue: simulated stars, gray: simulated galaxies). On Gaussian sky the simulated stars form a tight clump of their
+        own; adding real sky (rung 2) moves them into the real cloud. After that the clouds overlap, and how close they are
+        (the Fréchet distance in each title) no longer predicts accuracy: over rungs 2–11 the rank correlation is zero.
+        Looking alike to the network is not the same as being classified alike.</figcaption>
+    </figure>
   </section>
 
   <!-- ===================== FAINT GALAXIES ===================== -->
