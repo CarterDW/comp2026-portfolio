@@ -73,6 +73,20 @@ Gravity_Golf/results/play/courses.json gravity-golf/play/courses.json
 Gravity_Golf/results/step6_headline.png gravity-golf/img/step6_headline.png
 Gravity_Golf/results/step6_shot.mp4 gravity-golf/img/step6_shot.mp4
 10_Convolutions_and_Galaxies/results/browser/fields.json sky-classifier/fields/fields.json
+10_Convolutions_and_Galaxies/results/ledger/ledger.json sky-classifier/ledger/ledger.json
+10_Convolutions_and_Galaxies/results/ledger/real.png sky-classifier/ledger/real.png
+10_Convolutions_and_Galaxies/results/ledger/rung_0.png sky-classifier/ledger/rung_0.png
+10_Convolutions_and_Galaxies/results/ledger/rung_1.png sky-classifier/ledger/rung_1.png
+10_Convolutions_and_Galaxies/results/ledger/rung_2.png sky-classifier/ledger/rung_2.png
+10_Convolutions_and_Galaxies/results/ledger/rung_3.png sky-classifier/ledger/rung_3.png
+10_Convolutions_and_Galaxies/results/ledger/rung_4.png sky-classifier/ledger/rung_4.png
+10_Convolutions_and_Galaxies/results/ledger/rung_5.png sky-classifier/ledger/rung_5.png
+10_Convolutions_and_Galaxies/results/ledger/rung_6.png sky-classifier/ledger/rung_6.png
+10_Convolutions_and_Galaxies/results/ledger/rung_7.png sky-classifier/ledger/rung_7.png
+10_Convolutions_and_Galaxies/results/ledger/rung_8.png sky-classifier/ledger/rung_8.png
+10_Convolutions_and_Galaxies/results/ledger/rung_9.png sky-classifier/ledger/rung_9.png
+10_Convolutions_and_Galaxies/results/ledger/rung_10.png sky-classifier/ledger/rung_10.png
+10_Convolutions_and_Galaxies/results/ledger/rung_11.png sky-classifier/ledger/rung_11.png
 LIST
 
 # Field browser: the 300 SDSS field JPEGs it shows (from the course data folder, outside agentic/)

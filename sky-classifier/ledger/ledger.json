@@ -1,0 +1,611 @@
+{
+ "ingredients": [
+  {
+   "rung": 0,
+   "name": "Moffat PSF with the measured FWHM distribution",
+   "why": "Stars are the PSF: the starting point, a bare star on Gaussian noise.",
+   "img": "rung_0.png",
+   "acc": [
+    0.0,
+    0.0
+   ],
+   "removal": null
+  },
+  {
+   "rung": 1,
+   "name": "Brightness matching (fading the galaxies)",
+   "why": "Otherwise brightness alone separates the classes.",
+   "img": "rung_1.png",
+   "acc": [
+    0.0,
+    0.0
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      10.7,
+      true
+     ],
+     [
+      15.9,
+      true
+     ],
+     [
+      13.3,
+      true
+     ],
+     [
+      -5.9,
+      true
+     ],
+     [
+      19.5,
+      true
+     ],
+     [
+      -78.0,
+      true
+     ],
+     [
+      1.2,
+      true
+     ]
+    ],
+    "verdict": "decision moved toward 'star' (galaxies pay)"
+   }
+  },
+  {
+   "rung": 2,
+   "name": "Real sky backgrounds",
+   "why": "Gaussian noise is trivially separable from real sky: without it every real star is called a galaxy.",
+   "img": "rung_2.png",
+   "acc": [
+    71.7,
+    2.1
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -71.7,
+      true
+     ],
+     [
+      -84.0,
+      true
+     ],
+     [
+      -77.8,
+      true
+     ],
+     [
+      -96.6,
+      true
+     ],
+     [
+      -53.1,
+      true
+     ],
+     [
+      4.1,
+      true
+     ],
+     [
+      1.2,
+      true
+     ]
+    ],
+    "verdict": "sim task made trivial (a tell): 100% on its own sim test"
+   }
+  },
+  {
+   "rung": 3,
+   "name": "Pupil diffraction (obstruction, four vanes)",
+   "why": "Bright stars have spikes and rings.",
+   "img": "rung_3.png",
+   "acc": [
+    74.8,
+    2.7
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      0.3,
+      false
+     ],
+     [
+      -0.1,
+      false
+     ],
+     [
+      0.1,
+      false
+     ],
+     [
+      0.1,
+      false
+     ],
+     [
+      -0.2,
+      false
+     ],
+     [
+      0.2,
+      false
+     ],
+     [
+      0.1,
+      false
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 4,
+   "name": "Kolmogorov seeing, wavelength-dependent PSF",
+   "why": "The PSF core and wings, and their colour dependence.",
+   "img": "rung_4.png",
+   "acc": [
+    86.4,
+    2.6
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      3.7,
+      false
+     ],
+     [
+      2.1,
+      false
+     ],
+     [
+      2.9,
+      false
+     ],
+     [
+      1.1,
+      false
+     ],
+     [
+      10.4,
+      false
+     ],
+     [
+      -2.3,
+      true
+     ],
+     [
+      0.2,
+      true
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 5,
+   "name": "Blackbody star colours through g, r, i",
+   "why": "The stellar locus.",
+   "img": "rung_5.png",
+   "acc": [
+    92.7,
+    2.0
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -0.1,
+      false
+     ],
+     [
+      -3.9,
+      false
+     ],
+     [
+      -2.0,
+      false
+     ],
+     [
+      0.8,
+      false
+     ],
+     [
+      -2.7,
+      false
+     ],
+     [
+      -1.6,
+      true
+     ],
+     [
+      -0.3,
+      true
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 6,
+   "name": "DR16 galaxy frames",
+   "why": "The galaxies came from an older SDSS processing (DR7), 98% separable from DR16 on its own: a leak.",
+   "img": "rung_6.png",
+   "acc": [
+    74.1,
+    3.4
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      22.8,
+      true
+     ],
+     [
+      9.5,
+      true
+     ],
+     [
+      16.2,
+      true
+     ],
+     [
+      2.4,
+      true
+     ],
+     [
+      36.1,
+      true
+     ],
+     [
+      -2.8,
+      true
+     ],
+     [
+      0.6,
+      true
+     ]
+    ],
+    "verdict": "decision moved toward 'star' (galaxies pay), plus realism"
+   }
+  },
+  {
+   "rung": 7,
+   "name": "Stretch recalibrated on catalogue fluxes",
+   "why": "Simulated star profiles didn't match real ones.",
+   "img": "rung_7.png",
+   "acc": [
+    77.8,
+    3.8
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -3.4,
+      false
+     ],
+     [
+      -1.4,
+      false
+     ],
+     [
+      -2.4,
+      false
+     ],
+     [
+      -0.6,
+      false
+     ],
+     [
+      -2.2,
+      false
+     ],
+     [
+      1.0,
+      false
+     ],
+     [
+      0.1,
+      false
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 8,
+   "name": "Colour-preserving saturation",
+   "why": "Bright simulated stars had the wrong core colours.",
+   "img": "rung_8.png",
+   "acc": [
+    77.9,
+    4.1
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -0.2,
+      false
+     ],
+     [
+      -0.1,
+      false
+     ],
+     [
+      -0.1,
+      false
+     ],
+     [
+      0.1,
+      false
+     ],
+     [
+      -0.4,
+      false
+     ],
+     [
+      0.3,
+      false
+     ],
+     [
+      0.0,
+      false
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 9,
+   "name": "Fitted JPEG colour mapping",
+   "why": "Part of the fit that took real-star accuracy from 73.5% to 82.3%.",
+   "img": "rung_9.png",
+   "acc": [
+    78.6,
+    2.9
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -3.4,
+      false
+     ],
+     [
+      -0.1,
+      false
+     ],
+     [
+      -1.7,
+      false
+     ],
+     [
+      -0.9,
+      false
+     ],
+     [
+      5.0,
+      false
+     ],
+     [
+      -2.3,
+      true
+     ],
+     [
+      0.0,
+      false
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 10,
+   "name": "PSF halo",
+   "why": "Part of the same fit: the far wings of the PSF.",
+   "img": "rung_10.png",
+   "acc": [
+    77.6,
+    3.0
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      -0.7,
+      false
+     ],
+     [
+      0.2,
+      false
+     ],
+     [
+      -0.2,
+      false
+     ],
+     [
+      0.4,
+      false
+     ],
+     [
+      0.1,
+      false
+     ],
+     [
+      -0.6,
+      false
+     ],
+     [
+      0.5,
+      true
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": 11,
+   "name": "Fitted vane width",
+   "why": "Part of the same fit: the diffraction spikes' width.",
+   "img": "rung_11.png",
+   "acc": [
+    77.8,
+    3.3
+   ],
+   "removal": {
+    "cols": [
+     "bright stars",
+     "faint stars",
+     "all real stars",
+     "quasars",
+     "field stars",
+     "field galaxies",
+     "sim test (control)"
+    ],
+    "shift": [
+     [
+      0.1,
+      false
+     ],
+     [
+      -0.6,
+      false
+     ],
+     [
+      -0.2,
+      false
+     ],
+     [
+      0.2,
+      false
+     ],
+     [
+      1.3,
+      false
+     ],
+     [
+      0.2,
+      false
+     ],
+     [
+      -0.0,
+      false
+     ]
+    ],
+    "verdict": "within the bar on real stars"
+   }
+  },
+  {
+   "rung": null,
+   "name": "Faint, distant galaxies (artificial redshifting)",
+   "img": null,
+   "acc": null,
+   "removal": null,
+   "why": "Faint real galaxies were called stars; the training set had none that small. Added in final-arc step 3."
+  },
+  {
+   "rung": null,
+   "name": "Real star colours from the SDSS catalogue",
+   "img": null,
+   "acc": [
+    92.6,
+    null
+   ],
+   "removal": null,
+   "why": "The ingredient that mattered most: real-star accuracy rose from 78% to 93%, against a 98% ceiling (final-arc step 4)."
+  }
+ ],
+ "real": {
+  "img": "real.png",
+  "r": 16.0
+ },
+ "bar": 6.7
+}
