@@ -55,8 +55,8 @@
     <div class="stat-row">
       <div class="stat"><div class="v">0.8%</div><div class="l">of random shots sink</div></div>
       <div class="stat"><div class="v">~100</div><div class="l">shots CMA-ES needs to sink 83% of courses</div></div>
-      <div class="stat"><div class="v">85–94%</div><div class="l">sunk by the policy in one shot (1–2 planets, 3 seeds)</div></div>
-      <div class="stat"><div class="v">5–9%</div><div class="l">on 3–4 planet courses it never trained on</div></div>
+      <div class="stat"><div class="v">98%</div><div class="l">of unseen 1–2 planet courses sunk by the policy in one shot</div></div>
+      <div class="stat"><div class="v">4–13%</div><div class="l">on 3–4 planet courses it never trained on</div></div>
     </div>
   </section>
 
@@ -117,13 +117,26 @@
         On one and two planets it goes from spraying shots everywhere to a tight bundle into the hole. On three and four
         planets, which it never trained on, it mostly doesn't generalize yet: that's the next step.</figcaption>
     </figure>
+
+    <h3>Robust basins, and how the policy dodges the chaos</h3>
+    <p class="prose">Trained further on the full game, where flights may last 20 time units and the long-flight landscape is
+      fractal, the best network sinks <b>99.6% of unseen one-planet and 96% of two-planet courses with a single shot</b>. CMA-ES
+      needs about 300 simulated shots per course to match that. It never learned a slingshot. Every one of its sinks lands within
+      1.4 time units, well inside the smooth, short-flight part of the landscape. CMA-ES, which only looks for the first shot
+      that works, finds 6–12% of its sinks on long, chaotic flights. Given the choice, the policy avoids the chaos.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/step3_basins_tier2.png"><img src="img/step3_basins_tier2.png" alt="Outcome maps around the policy's shot and the CMA-ES shot on three courses, and a scatter of basin widths" loading="lazy"></a>
+      <figcaption><b>Robust basin or sliver?</b> Left: every possible shot on three courses (gold sinks, charcoal crashes),
+        with the policy's shot (circle) and CMA-ES's first sink (×). Middle: zooms around each. The dashed circle is the basin
+        width, the largest nudge that still sinks 90% of the time. Right: the policy's basin is wider on 72% of courses
+        (median 0.0104 vs 0.0065 rad). A policy that keeps some spread in its aim pays for landing on a sliver, so it learns to
+        aim mid-band; an optimizer that stops at the first sink often lands near an edge.</figcaption>
+    </figure>
   </section>
 
   <section id="next">
     <h2>Coming</h2>
     <ul class="todo-list prose">
-      <li><span class="chip next">long flights</span><div>Retrain on the chaotic, 20-time-unit game, and test whether a noisy
-        policy prefers wide, robust basins over the thin fractal slivers an optimizer is happy with.</div></li>
       <li><span class="chip next">physics gradients</span><div>Train by backpropagating through the integrator itself, against
         policy gradient.</div></li>
       <li><span class="chip next">more planets</span><div>A permutation-invariant network and a curriculum, so the policy
