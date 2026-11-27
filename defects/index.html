@@ -25,6 +25,7 @@
       <li><a href="#coarsening">Coarsening</a></li>
       <li><a href="#cosmo">Expanding universe</a></li>
       <li><a href="#vortices-kz">Vortex KZ</a></li>
+      <li><a href="#strings">Strings</a></li>
       <li><a href="#next">Coming</a></li>
     </ul>
   </div>
@@ -229,6 +230,22 @@
         law (blue) and the logarithmic form (red; dotted: fitted to the slower ramps only); inset: the power-law exponent
         fitted over one decade at a time, which drifts. Top right: residuals. Bottom: the spin angle as colour at the
         moment of crossing T<sub>KT</sub> for three cooling times, with vortices (white) and antivortices (black).</figcaption>
+    </figure>
+  </section>
+
+  <section id="strings">
+    <h2>Cosmic strings in 3D</h2>
+    <p class="prose">In three dimensions the vortices become strings, the global strings of axion cosmology. Simulated on
+      a 512³ grid on the GPU, the network keeps roughly one string per Hubble volume as the universe expands, but the
+      number per horizon creeps upward with the logarithm of time, at 0.18 per unit of the log, close to the 0.22 found
+      in the large published simulations this setup follows. That slow climb matters: extrapolated over the ~70 units of
+      log to the real early universe, it sets how many axions the strings radiate.</p>
+    <figure class="fig">
+      <a class="zoom" href="img/kz_step10_strings.png"><img src="img/kz_step10_strings.png" alt="Three-dimensional renders of a global string network at three times with the horizon as a sphere, and the number of strings per horizon against the logarithm of time" loading="lazy"></a>
+      <figcaption><b>A string network growing up.</b> Top: every string in the box at three times, with the horizon as a
+        sphere; the network thins out as the horizon grows. Bottom left: ξ, the string length per Hubble volume, against
+        log(m<sub>r</sub>/H); after the initial transient (gray) it rises linearly, with slope 0.18 against the published
+        0.22. Bottom right: string length per volume falls more slowly than η<sup>−2</sup>, the signature of that climb.</figcaption>
     </figure>
   </section>
 
