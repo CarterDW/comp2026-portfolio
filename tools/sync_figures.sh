@@ -125,3 +125,6 @@ W, H = im.size
 im.crop((int(.12*W), int(.18*H), int(.92*W), int(.78*H))).resize((800, 600), Image.LANCZOS).save(f"{d}/assets/thumb-golf.jpg", quality=86)
 PY
 echo "synced to $DST"
+
+# Solar-system beauty renders (stills + movies)
+SRC="$SRC" DST="$DST" "$DST/tools/sync_beauty.sh"

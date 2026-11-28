@@ -19,6 +19,7 @@
   <div class="nav-inner">
     <a class="brand" href="../">Portfolio</a>
     <ul>
+      <li><a href="#pictures">Pictures</a></li>
       <li><a href="#ledger">Ledger</a></li>
       <li><a href="#final-arc">Final arc</a></li>
       <li><a href="#open-problem">Open problem</a></li>
@@ -44,9 +45,66 @@
     </div>
   </header>
 
+  <!-- ===================== PICTURES ===================== -->
+  <section id="pictures">
+    <h2>The story in pictures</h2>
+    <p class="beauty-note">The same simulations, rendered for looks rather than measurement. Positions, masses, temperatures
+      and gaps come from the runs; brightness stretches, textures and planet sizes are artistic, and anything added for the
+      picture is said in its caption.</p>
+    <div class="beauty-grid">
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/collapse_hero.jpg"><img src="img/beauty/collapse_hero_web.jpg" loading="lazy" alt="A newborn star inside its spinning disk, the near side blue and the far side red"></a>
+        <figcaption><b>A newborn star and its disk.</b> The SPH collapse run, 620 AU across. Gas coming towards us is blue,
+          gas moving away is red: the disk is spinning.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/ignition_hero.jpg"><img src="img/beauty/ignition_hero_web.jpg" loading="lazy" alt="A spotted orange protostar with glowing streams of gas arcing onto it from a surrounding disk"></a>
+        <figcaption><b>Still feeding.</b> The protostar at 30,000 years, 3.6 R☉ and 4,300 K, with granulation and starspots.
+          The magnetic accretion streams and inner disk are an illustration: the model tracks only the accretion rate.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/formation_hero.jpg"><img src="img/beauty/formation_hero_web.jpg" loading="lazy" alt="A purple gas disk with a dark gap carved by a banded giant planet, small icy embryos near the star"></a>
+        <figcaption><b>A giant carves its disk.</b> At 1.45 Myr a 290 M⊕ giant has opened a gap. Its width and depth come from
+          the run's own gap model; the sparkles are the planetesimals.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/orrery_hero.jpg"><img src="img/beauty/orrery_hero_web.jpg" loading="lazy" alt="Rocky planets and leftover planetesimals on criss-crossing orbits around a bright star, a giant planet outside"></a>
+        <figcaption><b>A finished system.</b> 20 Myr later. Each planet is coloured by where its material started, tracked
+          through every collision: red from the inner disk, blue from the icy outer disk.</figcaption>
+      </figure>
+    </div>
+    <figure class="fig beauty-wide">
+      <a class="zoom" href="img/beauty/ignition_strip.jpg"><img src="img/beauty/ignition_strip_web.jpg" loading="lazy" alt="The protostar at five ages drawn to scale, shrinking from 4.1 to 0.6 solar radii, above its rising core temperature"></a>
+      <figcaption><b>A star switches on.</b> The protostar at five ages, to scale, from the one-zone model: it shrinks from
+        4.1 to 0.62 R☉ while its core heats past deuterium ignition to hydrogen burning.</figcaption>
+    </figure>
+    <div class="beauty-movies">
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/collapse.mp4"><video src="img/beauty/collapse.mp4" poster="img/beauty/collapse_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="A cloud collapsing into a star and a spinning disk"></video></a>
+        <figcaption><b>Collapse.</b> The cloud falls in, the star forms, and the camera circles its disk.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/ignition_evolution.mp4"><video src="img/beauty/ignition_evolution.mp4" poster="img/beauty/ignition_evolution_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="A rotating star shrinking over 150 million years as its core temperature climbs"></video></a>
+        <figcaption><b>Ignition.</b> 20,000 years to 150 Myr: the star shrinks, its spots fade, its core reaches 10 million K.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/ignition_feeding.mp4"><video src="img/beauty/ignition_feeding.mp4" poster="img/beauty/ignition_feeding_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="A rotating protostar with gas flowing along magnetic field lines from its disk"></video></a>
+        <figcaption><b>Feeding.</b> Gas falling along the field lines onto the spinning protostar (illustration).</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/formation.mp4"><video src="img/beauty/formation.mp4" poster="img/beauty/formation_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Embryos migrating inward in a gas disk while one grows into a giant that opens a gap"></video></a>
+        <figcaption><b>Formation.</b> 1 to 3 Myr: thirteen embryos migrate, one runs away into a giant and opens its gap.</figcaption>
+      </figure>
+      <figure class="fig">
+        <a class="zoom" href="img/beauty/orrery.mp4"><video src="img/beauty/orrery.mp4" poster="img/beauty/orrery_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Planetesimals and rocky embryos colliding and settling over 20 million years"></video></a>
+        <figcaption><b>Assembly.</b> 0 to 20 Myr of the inner system; collisions flash. Orbits are sped up for display.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- ===================== MOVIES ===================== -->
   <section>
-    <h2>From cloud to planets</h2>
+    <h2>The same stages, as science plots</h2>
     <div class="movies">
       <figure class="fig">
         <a class="zoom" href="img/collapse_to_disk.mp4"><video src="img/collapse_to_disk.mp4" poster="img/collapse_to_disk_poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Gas cloud collapsing into a protostar and disk"></video></a>

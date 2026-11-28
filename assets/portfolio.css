@@ -119,3 +119,13 @@ body.space .project:hover, body.space .card:hover { border-color: var(--accent);
 body.space .method div { border-top-color: var(--accent); }
 
 .subhead { font-size: 18px; color: var(--muted); margin: 34px 0 14px; font-weight: 600; }
+
+/* beauty gallery (solar page): dark renders, so no white matting */
+.beauty-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.beauty-movies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+.beauty-grid .fig, .beauty-movies .fig { margin: 0; }
+.beauty-wide { margin: 16px 0 28px; }
+body.space .beauty-grid a.zoom, body.space .beauty-movies a.zoom, body.space .beauty-wide a.zoom { background: #05060c; }
+.beauty-grid img, .beauty-movies video { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; display: block; background: #05060c; }
+.beauty-note { font-size: 14px; color: var(--muted); max-width: 820px; margin: 4px 0 22px; }
+@media (max-width: 760px) { .beauty-grid, .beauty-movies { grid-template-columns: 1fr; } }
